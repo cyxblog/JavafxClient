@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cyx.mapper.MessageMapper">
+    <select id="getMessageById" parameterType="Integer" resultType="Message">
+        select * from message where id = #{id};
+    </select>
+
+    <select id="getMessagesByUserId" parameterType="Integer" resultType="Message">
+        select * from message where userId = #{userId}
+    </select>
+
+    <select id="getAllMessages" resultType="Message">
+        select * from message;
+    </select>
+
+    <insert id="addMessage" parameterType="Message">
+        insert into message (userId, text, type, fileType, fileName, fileLength,filePath,url)
+        values (#{userId}, #{text},#{type},#{fileType},#{fileName},#{fileLength},#{filePath},#{url});
+    </insert>
+
+    <delete id="deleteMessageById" parameterType="Integer">
+        delete from message where id = #{id}
+    </delete>
+
+    <delete id="deleteMessageByUserId" parameterType="Integer">
+        delete from message where userId = #{userId}
+    </delete>
+
+    <update id="updateMessage" parameterType="Message">
+        update message set
+        userId = #{userId},
+        text = #{text},
+        type = #{type}
+        fileType = #{fileType}
+        fileName = #{fileName}
+        fileLength = #{fileLength}
+        filePath = #{filePath}
+        url = #{url}
+        where
+        id = #{id}
+    </update>
+</mapper>

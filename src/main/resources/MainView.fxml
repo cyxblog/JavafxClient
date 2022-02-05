@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="mainView" minHeight="555.0" minWidth="700.0" prefHeight="555.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cyx.controller.MainController">
+    <children>
+        <AnchorPane prefHeight="200.0" prefWidth="55.0" style="-fx-background-color: #2e2e2e;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="36.0">
+                    <image>
+                        <Image url="@images/wangwang.jpg" />
+                    </image>
+                </ImageView>
+                <VBox prefHeight="280.0" prefWidth="55.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="71.0">
+                    <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-chat-icon">
+                            <tooltip>
+                                <Tooltip text="聊天" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-album-icon">
+                            <tooltip>
+                                <Tooltip text="通讯录" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-collection-icon">
+                            <tooltip>
+                                <Tooltip text="收藏" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button ellipsisString="" layoutX="20.0" layoutY="110.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-file-icon">
+                            <tooltip>
+                                <Tooltip text="聊天文件" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button ellipsisString="" layoutX="20.0" layoutY="150.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-friends-icon">
+                            <tooltip>
+                                <Tooltip text="朋友圈" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button ellipsisString="" layoutX="20.0" layoutY="150.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-see-icon">
+                            <tooltip>
+                                <Tooltip text="看一看" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets left="17.5" top="25.0" />
+                    </padding>
+                </VBox>
+                <VBox prefHeight="100.0" prefWidth="55.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                    <children>
+                        <Button ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-little-program-icon">
+                            <tooltip>
+                                <Tooltip text="小程序面板" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button ellipsisString="" layoutX="27.0" layoutY="10.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-phone-icon">
+                            <tooltip>
+                                <Tooltip text="手机" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Button ellipsisString="" layoutX="27.0" layoutY="50.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-more-icon">
+                            <tooltip>
+                                <Tooltip text="更多" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="17.5" />
+                    </padding>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #f7f7f7;" styleClass="main-middle-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="main-chat-list-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
+                    <content>
+                        <VBox fx:id="chatVBox" maxWidth="248.0" minWidth="248.0" prefWidth="248.0" style="-fx-background-color: transparent;" />
+                    </content>
+                </ScrollPane>
+                <HBox prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #e2e2e2;" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="25.0">
+                    <children>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/glass.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets top="3.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <TextField maxHeight="25.0" maxWidth="1.7976931348623157E308" minHeight="25.0" prefHeight="25.0" promptText="搜索" style="-fx-border-style: none; -fx-background-color: #e2e2e2;" />
+                    </children>
+                    <padding>
+                        <Insets top="3.5" />
+                    </padding>
+                </HBox>
+                <Button ellipsisString="" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onMouseClicked="#onAddButtonClicked" prefHeight="25.0" prefWidth="25.0" styleClass="main-add-icon" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="27.0">
+                    <tooltip>
+                        <Tooltip text="发起群聊" />
+                    </tooltip>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f5f5f5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <SplitPane fx:id="messageSplitPane" dividerPositions="0.53" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" styleClass="main-split-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
+                    <items>
+                  <ScrollPane fx:id="messageScrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vvalue="1.0">
+                     <content>
+                                <VBox fx:id="messageVBox" prefHeight="0.0" />
+                     </content>
+                  </ScrollPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #ffffff;">
+                            <children>
+                                <TextArea fx:id="inputTextArea" prefHeight="200.0" prefWidth="200.0" styleClass="main-input-area" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                                <HBox prefHeight="40.0" prefWidth="200.0" spacing="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Button ellipsisString="" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-emoji-icon">
+                                            <tooltip>
+                                                <Tooltip text="表情" />
+                                            </tooltip>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button ellipsisString="" layoutX="10.0" layoutY="10.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-send-file-icon" onMouseClicked="#onChooseFile">
+                                            <tooltip>
+                                                <Tooltip text="发送文件" />
+                                            </tooltip>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button ellipsisString="" layoutX="10.0" layoutY="10.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-cut-icon">
+                                            <tooltip>
+                                                <Tooltip text="截图" />
+                                            </tooltip>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button ellipsisString="" layoutX="95.0" layoutY="10.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-chat-record-icon">
+                                            <tooltip>
+                                                <Tooltip text="聊天记录" />
+                                            </tooltip>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets left="25.0" top="5.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox prefHeight="40.0" prefWidth="91.0" spacing="6.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Button ellipsisString="" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-voice-icon">
+                                            <tooltip>
+                                                <Tooltip text="语音聊天" />
+                                            </tooltip>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                        <Button ellipsisString="" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-video-icon">
+                                            <tooltip>
+                                                <Tooltip text="视频聊天" />
+                                            </tooltip>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets top="5.0" />
+                                    </padding>
+                                </HBox>
+                                <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" maxWidth="70.0" minHeight="25.0" minWidth="70.0" mnemonicParsing="false" onMouseClicked="#onSendMessage" prefHeight="25.0" prefWidth="70.0" styleClass="main-send-button" text="发送(S)" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="30.0">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+                <AnchorPane prefHeight="62.0" prefWidth="200.0" styleClass="main-right-top-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Button fx:id="chatInfoButton" ellipsisString="" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" styleClass="main-chat-messages-icon" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                            <tooltip>
+                                <Tooltip text="聊天信息" />
+                            </tooltip>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <HBox prefHeight="25.0" prefWidth="132.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <Button ellipsisString="" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" onMouseClicked="#onWindowTop" prefHeight="25.0" prefWidth="33.0" styleClass="main-top-icon">
+                                    <tooltip>
+                                        <Tooltip text="置顶" />
+                                    </tooltip>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button ellipsisString="" layoutX="10.0" layoutY="10.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" onMouseClicked="#onWindowHide" prefHeight="25.0" prefWidth="33.0" styleClass="main-hide-icon">
+                                    <tooltip>
+                                        <Tooltip text="最小化" />
+                                    </tooltip>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button ellipsisString="" layoutX="43.0" layoutY="10.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" onMouseClicked="#onWindowFull" prefHeight="25.0" prefWidth="33.0" styleClass="main-full-icon">
+                                    <tooltip>
+                                        <Tooltip text="最大化" />
+                                    </tooltip>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button ellipsisString="" layoutX="43.0" layoutY="10.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" onMouseClicked="#onWindowClosed" prefHeight="25.0" prefWidth="33.0" styleClass="main-close-icon">
+                                    <tooltip>
+                                        <Tooltip text="关闭" />
+                                    </tooltip>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <Label fx:id="topNameLabel" text="邹金财" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <ImageView fx:id="weChatLogo" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="157.5" AnchorPane.topAnchor="237.5">
+                    <image>
+                        <Image url="@images/we_chat.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

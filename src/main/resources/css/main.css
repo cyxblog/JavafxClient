@@ -1,0 +1,306 @@
+.main-chat-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/bubble.png");
+}
+
+.main-album-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/people.png");
+}
+
+.main-collection-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/cube.png");
+}
+
+.main-file-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/folder.png");
+}
+
+.main-friends-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/friend.png");
+}
+
+.main-see-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/react.png");
+}
+
+.main-little-program-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/little_program.png");
+}
+
+.main-phone-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 25px 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/phone.png");
+}
+
+.main-more-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/more.png");
+}
+
+.main-top-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 13px 13px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/pin.png");
+}
+
+.main-hide-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 13px 13px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/shrink.png");
+}
+
+.main-full-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 13px 13px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/enlarge.png");
+}
+
+.main-close-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 13px 13px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/close.png");
+}
+
+.main-chat-messages-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/message.png");
+}
+
+.main-emoji-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/smile.png");
+}
+
+.main-send-file-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 22px 22px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/folder2.png");
+}
+
+.main-cut-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/cut.png");
+}
+
+.main-chat-record-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/chat_record.png");
+}
+
+.main-voice-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 22px 22px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/voice.png");
+}
+
+.main-video-icon {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 20px 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/video.png");
+}
+
+.main-add-icon {
+
+    -fx-background-color: #e2e2e2;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 18px 18px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/add.png");
+}
+
+.main-add-icon:hover{
+    -fx-background-color: #d1d1d1;
+}
+
+.main-top-icon:hover {
+    -fx-background-color: #e2e2e2;
+}
+
+.main-hide-icon:hover {
+    -fx-background-color: #e2e2e2;
+}
+
+.main-full-icon:hover {
+    -fx-background-color: #e2e2e2;
+}
+
+.main-close-icon:hover {
+    -fx-background-color: #fb7373;
+}
+
+.main-send-button {
+    -fx-background-color: #f5f5f5;
+}
+
+.main-send-button:hover {
+    -fx-background-color: #129611;
+    -fx-text-fill: #ffffff;
+}
+
+.main-middle-pane {
+    -fx-border-insets: 0;
+    -fx-border-color: transparent #d6d6d6 transparent transparent;
+}
+
+.main-messages-list {
+    -fx-border-insets: 0;
+    -fx-border-color: transparent transparent transparent transparent;
+}
+
+.text-area {
+    -fx-border-insets: 0;
+    -fx-background-color: transparent, white, transparent, white, transparent;
+}
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white, transparent;
+}
+
+.text-area:focused {
+    -fx-background-color: transparent, white, transparent, white, transparent;
+}
+
+
+.main-chat-list-scroll-pane {
+    -fx-border-insets: 0;
+    -fx-background-color: transparent, transparent, transparent, transparent;
+}
+
+.main-chat-list-scroll-pane:focused {
+    -fx-background-color: transparent, transparent, transparent, transparent;
+}
+
+.main-split-pane {
+    -fx-border-insets: 0;
+    -fx-border-color: transparent transparent transparent transparent;
+}
+
+.main-split-pane *.split-pane-divider {
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0 1 0 1;
+}
+
+.main-chat-list-item:hover {
+    -fx-background-color: #d8d8d8;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent, transparent, transparent, transparent;
+    -fx-border-insets: 0;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-insets: 0;
+    -fx-border-color: transparent transparent transparent transparent;
+}
+
+.scroll-bar:vertical .track {
+    visibility: hidden;
+    -fx-background-color: transparent;
+    -fx-border-insets: 0;
+    -fx-border-color: transparent transparent transparent transparent;
+}

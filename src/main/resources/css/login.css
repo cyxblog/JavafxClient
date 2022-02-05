@@ -1,0 +1,45 @@
+.login-settings{
+    -fx-background-color:transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 15px 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/settings.png");
+}
+
+.login-settings-tip{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+}
+
+.login-close{
+    -fx-background-color:transparent;
+    -fx-border-radius: 0;
+    -fx-border-style: none;
+    -fx-background-size: 15px 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/close.png");
+}
+
+.login-close-tip{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+}
+
+.login-settings:hover{
+    -fx-background-color: #eeeeee;
+}
+
+.login-close:hover{
+    -fx-background-color: #fb7373;
+}
+
+.login-login{
+    -fx-background-color: #07c160;
+}
+
+.login-login:hover{
+    -fx-background-color: #07c160e0;
+}

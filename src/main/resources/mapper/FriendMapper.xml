@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cyx.mapper.FriendMapper">
+    <select id="getFriendById" parameterType="Integer" resultType="Friend">
+        select * from friend where id = #{id};
+    </select>
+
+    <select id="getAllFriends" resultType="Friend">
+        select * from friend;
+    </select>
+
+    <insert id="addFriend" parameterType="Friend">
+        insert into friend ( username, url)
+        values (#{username},#{url});
+    </insert>
+
+    <delete id="deleteFriendById" parameterType="Integer">
+        delete from friend where id = #{id}
+    </delete>
+
+    <update id="updateFriend" parameterType="Friend">
+        update friend set
+        username = #{username},
+        url = #{url}
+        where
+        id = #{id}
+    </update>
+</mapper>
