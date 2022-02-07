@@ -5,7 +5,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/bubble.png");
+    -fx-background-image: url("/images/button/bubble.png");
 }
 
 .main-album-icon {
@@ -15,7 +15,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/people.png");
+    -fx-background-image: url("/images/button/album.png");
 }
 
 .main-collection-icon {
@@ -25,17 +25,17 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/cube.png");
+    -fx-background-image: url("/images/button/collection.png");
 }
 
 .main-file-icon {
     -fx-background-color: transparent;
     -fx-border-style: none;
     -fx-border-radius: 0;
-    -fx-background-size: 20px 20px;
+    -fx-background-size: 18px 18px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/folder.png");
+    -fx-background-image: url("/images/button/folder.png");
 }
 
 .main-friends-icon {
@@ -45,7 +45,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/friend.png");
+    -fx-background-image: url("/images/button/friend.png");
 }
 
 .main-see-icon {
@@ -55,7 +55,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/react.png");
+    -fx-background-image: url("/images/button/see.png");
 }
 
 .main-little-program-icon {
@@ -65,7 +65,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/little_program.png");
+    -fx-background-image: url("/images/button/little_program.png");
 }
 
 .main-phone-icon {
@@ -75,17 +75,17 @@
     -fx-background-size: 25px 25px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/phone.png");
+    -fx-background-image: url("/images/button/phone.png");
 }
 
 .main-more-icon {
     -fx-background-color: transparent;
     -fx-border-style: none;
     -fx-border-radius: 0;
-    -fx-background-size: 20px 20px;
+    -fx-background-size: 18px 18px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/more.png");
+    -fx-background-image: url("/images/button/more.png");
 }
 
 .main-top-icon {
@@ -95,7 +95,7 @@
     -fx-background-size: 13px 13px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/pin.png");
+    -fx-background-image: url("/images/button/pin.png");
 }
 
 .main-hide-icon {
@@ -105,7 +105,7 @@
     -fx-background-size: 13px 13px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/shrink.png");
+    -fx-background-image: url("/images/button/shrink.png");
 }
 
 .main-full-icon {
@@ -115,7 +115,7 @@
     -fx-background-size: 13px 13px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/enlarge.png");
+    -fx-background-image: url("/images/button/enlarge.png");
 }
 
 .main-close-icon {
@@ -125,7 +125,7 @@
     -fx-background-size: 13px 13px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/close.png");
+    -fx-background-image: url("/images/button/close.png");
 }
 
 .main-chat-messages-icon {
@@ -135,7 +135,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/message.png");
+    -fx-background-image: url("/images/button/message.png");
 }
 
 .main-emoji-icon {
@@ -145,7 +145,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/smile.png");
+    -fx-background-image: url("/images/button/smile.png");
 }
 
 .main-send-file-icon {
@@ -155,7 +155,7 @@
     -fx-background-size: 22px 22px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/folder2.png");
+    -fx-background-image: url("/images/button/folder2.png");
 }
 
 .main-cut-icon {
@@ -165,7 +165,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/cut.png");
+    -fx-background-image: url("/images/button/cut.png");
 }
 
 .main-chat-record-icon {
@@ -175,7 +175,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/chat_record.png");
+    -fx-background-image: url("/images/button/chat_record.png");
 }
 
 .main-voice-icon {
@@ -185,7 +185,7 @@
     -fx-background-size: 22px 22px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/voice.png");
+    -fx-background-image: url("/images/button/voice.png");
 }
 
 .main-video-icon {
@@ -195,7 +195,7 @@
     -fx-background-size: 20px 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/video.png");
+    -fx-background-image: url("/images/button/video.png");
 }
 
 .main-add-icon {
@@ -206,10 +206,10 @@
     -fx-background-size: 18px 18px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/add.png");
+    -fx-background-image: url("/images/button/add.png");
 }
 
-.main-add-icon:hover{
+.main-add-icon:hover {
     -fx-background-color: #d1d1d1;
 }
 
@@ -243,11 +243,6 @@
     -fx-border-color: transparent #d6d6d6 transparent transparent;
 }
 
-.main-messages-list {
-    -fx-border-insets: 0;
-    -fx-border-color: transparent transparent transparent transparent;
-}
-
 .text-area {
     -fx-border-insets: 0;
     -fx-background-color: transparent, white, transparent, white, transparent;
@@ -261,19 +256,34 @@
     -fx-background-color: transparent, white, transparent, white, transparent;
 }
 
-
 .main-chat-list-scroll-pane {
-    -fx-border-insets: 0;
-    -fx-background-color: transparent, transparent, transparent, transparent;
+    /*-fx-border-insets: 0;*/
+    -fx-border-style: none;
+    -fx-background-color: transparent;
 }
 
 .main-chat-list-scroll-pane:focused {
-    -fx-background-color: transparent, transparent, transparent, transparent;
+    -fx-border-style: none;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
 }
 
 .main-split-pane {
-    -fx-border-insets: 0;
-    -fx-border-color: transparent transparent transparent transparent;
+    -fx-border-style: none;
+    -fx-background-color: transparent;
+}
+
+.main-split-pane .content {
+    -fx-border-style: none;
+}
+
+.main-split-pane:focused {
+    -fx-background-color: transparent, transparent, transparent, white, transparent;
+}
+
+.main-message-scroll-pane {
+    -fx-border-style: solid;
+    -fx-border-color: #d6d6d6 transparent transparent transparent;
 }
 
 .main-split-pane *.split-pane-divider {

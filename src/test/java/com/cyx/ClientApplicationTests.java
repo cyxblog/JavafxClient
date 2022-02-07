@@ -35,7 +35,8 @@ class ClientApplicationTests {
     @Test
     void contextLoads() {
 //        File file = new File(FileUtils.getFileTypeImagePath("sss.docx"));
-        System.out.println(FileUtils.getFileTypeImagePath("sss.docx"));
+        Message message = messageService.getLastMessageByUserId(1);
+        System.out.println(message);
     }
 
 }

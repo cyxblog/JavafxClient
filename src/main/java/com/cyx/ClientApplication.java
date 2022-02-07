@@ -1,14 +1,16 @@
 package com.cyx;
 
 import com.cyx.view.LoginView;
-import com.cyx.view.MainView;
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import de.felixroske.jfxsupport.SplashScreen;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @SpringBootApplication
 public class ClientApplication extends AbstractJavaFxApplicationSupport {
@@ -27,4 +29,11 @@ public class ClientApplication extends AbstractJavaFxApplicationSupport {
     public void beforeInitialView(Stage stage, ConfigurableApplicationContext ctx) {
         stage.initStyle(StageStyle.UNDECORATED);
     }
+
+    @Override
+    public Collection<Image> loadDefaultIcons() {
+        return Collections.singletonList(new Image("/images/logo/logo.png"));
+    }
+
+    
 }

@@ -1,0 +1,21 @@
+.dialog-close-button{
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+    -fx-border-radius: 0;
+    -fx-background-size: 15px 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-image: url("/images/button/close.png");
+}
+
+.dialog-close-button:hover{
+    -fx-background-color: #fb7373;
+}
+
+.dialog-send-button:hover{
+    -fx-background-color: #129611;
+}
+
+.dialog-cancel-button:hover{
+    -fx-background-color: #d1d1d1;
+}

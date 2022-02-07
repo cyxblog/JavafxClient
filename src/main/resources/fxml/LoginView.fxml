@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="loginView" maxHeight="380.0" maxWidth="280.0" minHeight="380.0" minWidth="280.0" prefHeight="380.0" prefWidth="280.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cyx.controller.LoginController">
+   <children>
+      <Label text="微信" textFill="#b2b2b2" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <GridPane alignment="CENTER" maxHeight="24.0" maxWidth="68.0" minHeight="24.0" minWidth="68.0" prefHeight="24.0" prefWidth="68.0" styleClass="login-right-top" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="24.0" maxWidth="34.0" minHeight="24.0" minWidth="34.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="34.0" styleClass="login-settings">
+                <tooltip>
+                    <Tooltip styleClass="login-settings-tip" text="设置" />
+                </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button ellipsisString="" maxHeight="24.0" maxWidth="34.0" minHeight="24.0" minWidth="34.0" mnemonicParsing="false" onMouseClicked="#onClosed" prefHeight="24.0" prefWidth="34.0" styleClass="login-close" GridPane.columnIndex="1">
+                <tooltip>
+                    <Tooltip styleClass="login-close-tip" text="关闭" />
+                </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </GridPane>
+      <ImageView fx:id="profileView" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="80.0">
+         <image>
+            <Image url="@../images/profile/wangwang.jpg" />
+         </image>
+      </ImageView>
+      <Label text="耳东人衣兴" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="180.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="33.0" maxWidth="180.0" minHeight="33.0" minWidth="180.0" mnemonicParsing="false" onMouseClicked="#onLogin" prefHeight="33.0" prefWidth="180.0" styleClass="login-login" text="登录" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label text="切换账号" textFill="#6683a8" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="65.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label text="仅传输文件" textFill="#6683a8" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="55.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Line endX="50.0" endY="45.0" startX="50.0" startY="55.0" stroke="#e2e2e2" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="140.0" />
+   </children>
+</AnchorPane>

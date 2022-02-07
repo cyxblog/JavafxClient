@@ -39,6 +39,11 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
+    public Message getLastMessageByUserId(int userId) {
+        return messageMapper.getLastMessageByUserId(userId);
+    }
+
+    @Override
     public List<Message> getMessagesByUserId(int userId) {
         return messageMapper.getMessagesByUserId(userId);
     }

@@ -6,7 +6,11 @@
     </select>
 
     <select id="getMessagesByUserId" parameterType="Integer" resultType="Message">
-        select * from message where userId = #{userId}
+        select * from message where userId = #{userId};
+    </select>
+
+    <select id="getLastMessageByUserId" parameterType="Integer" resultType="Message">
+        select * from message where userId = #{userId} order by id desc limit 1
     </select>
 
     <select id="getAllMessages" resultType="Message">

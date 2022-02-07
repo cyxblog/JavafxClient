@@ -1,6 +1,7 @@
 package com.cyx.controller;
 
 import com.cyx.ClientApplication;
+import com.cyx.handler.DragWindowHandler;
 import com.cyx.view.MainView;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
@@ -8,7 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -28,15 +31,27 @@ public class LoginController implements Initializable {
     @Autowired
     private MainView mainView;
 
+    @FXML
+    private AnchorPane loginView;
+
+    @FXML
+    private ImageView profileView;
+
     private Stage loginStage;
-
-    private double xOffset = 0;
-
-    private double yOffset = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loginStage = ClientApplication.getStage();
+        DragWindowHandler handler = new DragWindowHandler(loginStage);
+        loginView.setOnMousePressed(handler);
+        loginView.setOnMouseDragged(handler);
+
+        //头像圆角
+        profileView.setPreserveRatio(true);
+        Rectangle rectangle = new Rectangle(profileView.prefHeight(-1), profileView.prefWidth(-1));
+        rectangle.setArcWidth(20);
+        rectangle.setArcHeight(20);
+        profileView.setClip(rectangle);
     }
 
     /**

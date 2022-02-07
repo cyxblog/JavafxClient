@@ -4,17 +4,25 @@ import com.cyx.constant.MessageType;
 import com.cyx.pojo.Message;
 import com.cyx.utils.FileUtils;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;
 import javafx.scene.text.Font;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 public class MessageItemPane extends AnchorPane {
 
@@ -29,9 +37,9 @@ public class MessageItemPane extends AnchorPane {
         if (type == MessageType.TEXT_MESSAGE_SEND || type == MessageType.TEXT_MESSAGE_RECEIVE) {
             setTextPane(url, text, type);
         } else if (type == MessageType.IMAGE_MESSAGE_SEND || type == MessageType.IMAGE_MESSAGE_RECEIVE) {
-            setImagePane(url, fileType, fileName, fileLength, filePath, type);
+            setImagePane(url, filePath, type);
         } else {
-            setFilePane(url, fileName, fileLength, type);
+            setFilePane(url, fileName, fileLength, filePath, type);
         }
 
     }
@@ -68,13 +76,10 @@ public class MessageItemPane extends AnchorPane {
 
     }
 
-    private void setFilePane(String url, String fileName, long fileLength, int type) {
+    private void setFilePane(String url, String fileName, long fileLength, String filePath, int type) {
         ImageView profileView = new ImageView(new Image(url));
         profileView.setFitWidth(35);
         profileView.setFitHeight(35);
-        System.out.println("url ==>" + url);
-        System.out.println("filePath==>" + FileUtils.getFileTypeImagePath(fileName));
-        File file = new File(FileUtils.getFileTypeImagePath(fileName));
         ImageView fileImage = new ImageView(new Image(FileUtils.getFileTypeImagePath(fileName)));
         fileImage.setFitHeight(45);
         fileImage.setFitWidth(40);
@@ -98,6 +103,46 @@ public class MessageItemPane extends AnchorPane {
                 filePane.setStyle("-fx-background-color: #f7f7f7");
             } else {
                 filePane.setStyle("-fx-background-color: white");
+            }
+        });
+
+        filePane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                    try {
+                        Desktop.getDesktop().open(new File(filePath));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 1) {
+                    ContextMenu contextMenu = new ContextMenu();
+                    MenuItem copyItem = new MenuItem("复制");
+                    MenuItem forwardItem = new MenuItem("转发");
+                    MenuItem collectItem = new MenuItem("收藏");
+                    MenuItem multiChoicesItem = new MenuItem("多选");
+                    MenuItem referenceItem = new MenuItem("引用");
+                    MenuItem anotherSaveItem = new MenuItem("另存为...");
+                    MenuItem showOnDirItem = new MenuItem("在文件夹中显示");
+                    MenuItem deleteItem = new MenuItem("删除");
+
+                    contextMenu.getItems().addAll(copyItem, forwardItem, collectItem, multiChoicesItem,
+                            referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
+
+                    showOnDirItem.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                            try {
+                                File fileDir = new File(filePath).getParentFile();
+                                Desktop.getDesktop().open(fileDir);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    contextMenu.show(filePane, event.getScreenX(), event.getScreenY());
+                }
             }
         });
 
@@ -130,7 +175,74 @@ public class MessageItemPane extends AnchorPane {
 
     }
 
-    private void setImagePane(String url, String fileType, String fileName, long fileLength, String filePath, int type) {
+    private void setImagePane(String url, String filePath, int type) {
+
+        ImageView profileView = new ImageView(new Image(url));
+        profileView.setFitWidth(35);
+        profileView.setFitHeight(35);
+
+        ImageView imageView = new ImageView(new Image("file:" + filePath));
+
+        imageView.setPreserveRatio(true);
+        imageView.setFitHeight(220);
+        imageView.setFitWidth(220);
+
+        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                    try {
+                        Desktop.getDesktop().open(new File(filePath));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 1) {
+                    ContextMenu contextMenu = new ContextMenu();
+                    MenuItem copyItem = new MenuItem("复制");
+                    MenuItem editItem = new MenuItem("编辑");
+                    MenuItem forwardItem = new MenuItem("转发");
+                    MenuItem collectItem = new MenuItem("收藏");
+                    MenuItem multiChoicesItem = new MenuItem("多选");
+                    MenuItem referenceItem = new MenuItem("引用");
+                    MenuItem anotherSaveItem = new MenuItem("另存为...");
+                    MenuItem showOnDirItem = new MenuItem("在文件夹中显示");
+                    MenuItem deleteItem = new MenuItem("删除");
+
+                    contextMenu.getItems().addAll(copyItem, editItem,forwardItem, collectItem, multiChoicesItem,
+                            referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
+
+                    showOnDirItem.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+
+                            try {
+                                File fileDir = new File(filePath).getParentFile();
+                                Desktop.getDesktop().open(fileDir);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    contextMenu.show(imageView, event.getScreenX(), event.getScreenY());
+                }
+            }
+        });
+
+        this.getChildren().addAll(imageView, profileView);
+
+        if (type == MessageType.IMAGE_MESSAGE_RECEIVE) {
+
+            AnchorPane.setLeftAnchor(profileView, 25.0);
+            AnchorPane.setTopAnchor(profileView, 10.0);
+            AnchorPane.setLeftAnchor(imageView, 70.0);
+            AnchorPane.setTopAnchor(imageView, 10.0);
+        } else {
+            AnchorPane.setRightAnchor(profileView, 25.0);
+            AnchorPane.setTopAnchor(profileView, 10.0);
+            AnchorPane.setRightAnchor(imageView, 70.0);
+            AnchorPane.setTopAnchor(imageView, 10.0);
+        }
+
 
     }
 

@@ -20,6 +20,8 @@ public interface MessageMapper {
 
     Message getMessageById(int id);
 
+    Message getLastMessageByUserId(int userId);
+
     List<Message> getMessagesByUserId(int userId);
 
     List<Message> getAllMessages();
