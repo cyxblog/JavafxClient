@@ -18,7 +18,7 @@
                 </ImageView>
                 <VBox prefHeight="280.0" prefWidth="55.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="71.0">
                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-chat-icon">
+                        <Button onMouseClicked="#onChatButtonClicked" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-chat-icon">
                             <tooltip>
                                 <Tooltip text="聊天" />
                             </tooltip>
@@ -26,7 +26,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-album-icon">
+                        <Button onMouseClicked="#onAddressListButtonClicked" fx:id="addressListButton" ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-album-icon">
                             <tooltip>
                                 <Tooltip text="通讯录" />
                             </tooltip>
@@ -104,14 +104,14 @@
                 </VBox>
             </children>
         </AnchorPane>
-        <AnchorPane maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #f7f7f7;" styleClass="main-middle-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="middleAnchorPane" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #f7f7f7;" styleClass="main-middle-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="main-chat-list-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
+                <ScrollPane fx:id="chatListItemPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="main-chat-list-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
                     <content>
-                        <VBox fx:id="chatVBox" maxWidth="248.0" minWidth="248.0" prefWidth="248.0" style="-fx-background-color: transparent;" />
+                        <VBox fx:id="chatVBox" maxWidth="248.0" minWidth="248.0" prefWidth="248.0" style="-fx-background-color: transpanrent;" />
                     </content>
                 </ScrollPane>
-                <HBox maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5px;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0">
+                <HBox fx:id="searchHBox" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5px;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0">
                     <children>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -121,7 +121,10 @@
                                 <Insets top="5.0" />
                             </HBox.margin>
                         </ImageView>
-                        <TextField maxHeight="25.0" maxWidth="1.7976931348623157E308" minHeight="25.0" prefHeight="25.0" promptText="搜索" style="-fx-border-style: none; -fx-background-color: #e2e2e2;" />
+                        <TextField fx:id="searchField" prefHeight="25.0" promptText="搜索" style="-fx-border-style: none; -fx-background-color: #e2e2e2;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></TextField>
                     </children>
                     <padding>
                         <Insets left="5.0" />
@@ -148,7 +151,10 @@
                   </ScrollPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #ffffff;">
                             <children>
-                                <TextArea fx:id="inputTextArea" onDragDropped="#onFileDragDropped" onDragOver="#onFileDragOver" prefHeight="200.0" prefWidth="200.0" styleClass="main-input-area" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                                <TextArea fx:id="inputTextArea" onDragDropped="#onFileDragDropped" onDragOver="#onFileDragOver" prefHeight="200.0" prefWidth="200.0" style="-fx-padding: 0 25px 0 25px;" styleClass="main-input-area" wrapText="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                           <font>
+                              <Font name="Microsoft YaHei" size="14.0" />
+                           </font></TextArea>
                                 <HBox prefHeight="40.0" prefWidth="200.0" spacing="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                         <Button ellipsisString="" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-emoji-icon">
@@ -175,7 +181,7 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </Button>
-                                        <Button ellipsisString="" layoutX="95.0" layoutY="10.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-chat-record-icon">
+                                        <Button fx:id="chatRecordButton" ellipsisString="" layoutX="95.0" layoutY="10.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="main-chat-record-icon">
                                             <tooltip>
                                                 <Tooltip text="聊天记录" />
                                             </tooltip>
@@ -223,7 +229,7 @@
                         </AnchorPane>
                     </items>
                 </SplitPane>
-                <AnchorPane prefHeight="62.0" prefWidth="200.0" styleClass="main-right-top-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="rightAnchorPane" prefHeight="62.0" prefWidth="200.0" styleClass="main-right-top-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Button fx:id="chatInfoButton" ellipsisString="" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" styleClass="main-chat-messages-icon" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                             <tooltip>
@@ -279,7 +285,7 @@
                         </Label>
                     </children>
                 </AnchorPane>
-                <ImageView fx:id="weChatLogo" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="157.5" AnchorPane.topAnchor="237.5">
+                <ImageView fx:id="weChatLogo" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="237.5" AnchorPane.leftAnchor="157.5" AnchorPane.rightAnchor="157.5" AnchorPane.topAnchor="237.5">
                     <image>
                         <Image url="@../images/logo/we_chat.png" />
                     </image>

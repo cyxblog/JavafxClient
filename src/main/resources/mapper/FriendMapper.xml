@@ -5,23 +5,30 @@
         select * from friend where id = #{id};
     </select>
 
-    <select id="getAllFriends" resultType="Friend">
-        select * from friend;
+    <select id="getAllFriendsByUserId" resultType="Friend">
+        select * from friend where userId = #{userId};
     </select>
 
     <insert id="addFriend" parameterType="Friend">
-        insert into friend ( username, url)
-        values (#{username},#{url});
+        insert into friend ( username, url, userId, sign,remark,weChatAccount,from,sex,region)
+        values (#{username},#{url},#{userId},#{sign},#{remark},#{weChatAccount},#{from},#{sex},#{region});
     </insert>
 
-    <delete id="deleteFriendById" parameterType="Integer">
-        delete from friend where id = #{id}
+    <delete id="deleteFriendByUserId" parameterType="Integer">
+        delete from friend where userId = #{userId}
     </delete>
 
     <update id="updateFriend" parameterType="Friend">
         update friend set
         username = #{username},
-        url = #{url}
+        url = #{url},
+        username = #{username},
+        sign = #{sign},
+        remark = #{remark},
+        weChatAccount = #{weChatAccount},
+        from = #{from},
+        region = #{region},
+        userId = #{userId}
         where
         id = #{id}
     </update>

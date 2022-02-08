@@ -18,8 +18,8 @@ public class FriendServiceImpl implements FriendService{
     }
 
     @Override
-    public void deleteFriendById(int id) {
-        friendMapper.deleteFriendById(id);
+    public void deleteFriendByUserId(int userId) {
+        friendMapper.deleteFriendByUserId(userId);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class FriendServiceImpl implements FriendService{
     }
 
     @Override
-    public List<Friend> getAllFriends() {
-        return friendMapper.getAllFriends();
+    public List<Friend> getAllFriendsByUserId(int userId) {
+        return friendMapper.getAllFriendsByUserId(userId);
     }
 }

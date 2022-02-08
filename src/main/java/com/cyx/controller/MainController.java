@@ -2,23 +2,27 @@ package com.cyx.controller;
 
 
 import com.cyx.ClientApplication;
-import com.cyx.component.ChatListItemPane;
-import com.cyx.component.FileDialogPane;
-import com.cyx.component.MessageItemPane;
+import com.cyx.component.*;
 import com.cyx.constant.MessageType;
 import com.cyx.handler.DragWindowHandler;
 import com.cyx.pojo.ChatListItem;
+import com.cyx.pojo.Friend;
 import com.cyx.pojo.Message;
 import com.cyx.pojo.User;
 import com.cyx.service.ChatListItemServiceImpl;
+import com.cyx.service.FriendServiceImpl;
 import com.cyx.service.MessageServiceImpl;
 import com.cyx.service.UserServiceImpl;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -27,23 +31,26 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.plugin.javascript.navig.Anchor;
 
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
 
 @FXMLController
 public class MainController implements Initializable {
@@ -57,10 +64,22 @@ public class MainController implements Initializable {
     @Autowired
     private MessageServiceImpl messageService;
 
+    @Autowired
+    private FriendServiceImpl friendService;
+
     private Stage mainStage;
 
     @FXML
     private AnchorPane mainView;
+
+    @FXML
+    private AnchorPane middleAnchorPane;
+
+    @FXML
+    private AnchorPane rightAnchorPane;
+
+    @FXML
+    private ScrollPane chatListItemPane;
 
     @FXML
     private SplitPane messageSplitPane;
@@ -81,10 +100,22 @@ public class MainController implements Initializable {
     private Button topButton;
 
     @FXML
+    private Button chatRecordButton;
+
+    @FXML
+    private Button addressListButton;
+
+    @FXML
     private Button maximizeButton;
 
     @FXML
     private TextArea inputTextArea;
+
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private HBox searchHBox;
 
     @FXML
     private ImageView weChatLogo;
@@ -92,20 +123,30 @@ public class MainController implements Initializable {
     @FXML
     private ScrollPane messageScrollPane;
 
+    private AddressListVBox addressListVBox;
+
+    private AnchorPane friendInfoPane;
+
     private String profileUrl;
+
+    private HashMap<String, Node> nodeMap;
 
     int currentItemId = -1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        initView();
+        try {
+            initView();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * 初始化数据渲染
      */
-    public void initView() {
+    public void initView() throws IOException {
 
         mainStage = ClientApplication.getStage();
 
@@ -113,12 +154,23 @@ public class MainController implements Initializable {
         mainView.setOnMousePressed(handler);
         mainView.setOnMouseDragged(handler);
 
+        friendInfoPane = FXMLLoader.load(getClass().getResource("/fxml/FriendInfoView.fxml"));
+        nodeMap = getNodesMapFromFriendInfoPane(friendInfoPane);
+        rightAnchorPane.getChildren().add(friendInfoPane);
+        AnchorPane.setTopAnchor(friendInfoPane, 62.0);
+        AnchorPane.setLeftAnchor(friendInfoPane, 0.0);
+        AnchorPane.setRightAnchor(friendInfoPane, 0.0);
+        AnchorPane.setBottomAnchor(friendInfoPane, 0.0);
+        friendInfoPane.setVisible(false);
+        friendInfoPane.setManaged(false);
+
+
         messageSplitPane.setVisible(false);
         messageSplitPane.setManaged(false);
         topNameLabel.setVisible(false);
         chatInfoButton.setVisible(false);
-
         weChatLogo.setVisible(true);
+
         messageVBox.prefWidthProperty().bind(messageSplitPane.widthProperty());
 
         List<ChatListItem> allChatListItems = chatListItemService.getAllChatListItems();
@@ -143,6 +195,105 @@ public class MainController implements Initializable {
         }
         chatVBox.getChildren().addAll(itemPanes);
 
+        List<Friend> friendList = friendService.getAllFriendsByUserId(1);
+        List<FriendListItemPane> friendListItemPanes = new ArrayList<>();
+        for (Friend friend : friendList) {
+            String url = friend.getUrl();
+            String username = friend.getUsername();
+            FriendListItemPane friendListItemPane = new FriendListItemPane(url, username);
+            friendListItemPane.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && event.getButton() == MouseButton.PRIMARY) {
+                    messageSplitPane.setVisible(false);
+                    messageSplitPane.setManaged(false);
+                    chatRecordButton.setVisible(false);
+                    chatRecordButton.setManaged(false);
+                    weChatLogo.setVisible(false);
+                    weChatLogo.setManaged(false);
+                    topNameLabel.setVisible(false);
+                    topNameLabel.setManaged(false);
+                    friendInfoPane.setVisible(true);
+                    friendInfoPane.setManaged(true);
+
+                    ((Label)nodeMap.get("usernameLabel")).setText(friend.getUsername());
+                    ((Label)nodeMap.get("signLabel")).setText(friend.getSign());
+                    String sexImageUrl;
+                    if(friend.getSex()==0){
+                        sexImageUrl = "/images/logo/profile_female.png";
+                    }else{
+                        sexImageUrl = "/images/logo/profile_male.png";
+                    }
+                    ((ImageView)nodeMap.get("sexIV")).setImage(new Image(sexImageUrl));
+                    ((ImageView)nodeMap.get("profileIV")).setImage(new Image(friend.getUrl()));
+                    ((Label)nodeMap.get("remarkLabel")).setText(friend.getRemark());
+                    ((Label)nodeMap.get("regionLabel")).setText(friend.getRegion());
+                    ((Label)nodeMap.get("weChatAccountLabel")).setText(friend.getWeChatAccount());
+                    ((Label)nodeMap.get("fromLabel")).setText(friend.getFrom());
+                }
+            });
+            friendListItemPanes.add(friendListItemPane);
+        }
+        addressListVBox = new AddressListVBox(friendListItemPanes);
+
+        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                searchField.setStyle("-fx-background-color: white");
+                searchHBox.setStyle("-fx-background-color: white;" +
+                        "-fx-border-style: solid;" +
+                        "-fx-border-color: #e6e6e6");
+
+                SOSPane sosPane = new SOSPane();
+                chatListItemPane.setContent(sosPane);
+
+
+            } else {
+                searchField.setStyle("-fx-background-color: #e2e2e2");
+                searchHBox.setStyle("-fx-background-color: #e2e2e2;" +
+                        "-fx-border-style: none");
+                chatListItemPane.setContent(chatVBox);
+            }
+        });
+
+    }
+
+    /**
+     * 获得FriendInfoPane中的孩子节点
+     * @param friendInfoPane
+     * @return
+     */
+    private HashMap<String,Node> getNodesMapFromFriendInfoPane(AnchorPane friendInfoPane){
+        HashMap<String, Node> nodeMap = new HashMap<>();
+        for (Node child : friendInfoPane.getChildren()) {
+
+            if(child.getId() != null){
+
+                switch (child.getId()){
+                    case "usernameHBox":
+                        nodeMap.put("usernameLabel",((HBox)child).getChildren().get(0));
+                        nodeMap.put("sexIV",((HBox)child).getChildren().get(1));
+                        break;
+                    case "sign":
+                        nodeMap.put("signLabel", child);
+                        break;
+                    case "profile":
+                        nodeMap.put("profileIV", child);
+                        break;
+                    case "remark":
+                        nodeMap.put("remarkLabel", child);
+                        break;
+                    case "region":
+                        nodeMap.put("regionLabel", child);
+                        break;
+                    case "weChatAccount":
+                        nodeMap.put("weChatAccountLabel", child);
+                        break;
+                    case "from":
+                        nodeMap.put("fromLabel", child);
+                        break;
+                    default:nodeMap.put("others", child);
+                }
+            }
+        }
+        return nodeMap;
     }
 
     /**
@@ -164,29 +315,25 @@ public class MainController implements Initializable {
         contextMenu.getItems().addAll(topItem, readItem, botherItem, windowItem,
                 visibleItem, deleteItem);
 
-        deleteItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                itemPane.setVisible(false);
-                itemPane.setManaged(false);
+        deleteItem.setOnAction(event -> {
+            chatVBox.getChildren().remove(itemPane);
 
-                if (currentItemId == item.getId()) {
-                    messageSplitPane.setVisible(false);
-                    topNameLabel.setVisible(false);
-                    chatInfoButton.setVisible(false);
-                    weChatLogo.setVisible(true);
-                }
-
-                chatListItemService.deleteChatListItemById(item.getId());
-                messageService.deleteMessageByUserId(item.getId());
+            if (currentItemId == item.getId()) {
+                messageSplitPane.setVisible(false);
+                topNameLabel.setVisible(false);
+                chatInfoButton.setVisible(false);
+                weChatLogo.setVisible(true);
             }
+
+            chatListItemService.deleteChatListItemById(item.getId());
+            messageService.deleteMessageByUserId(item.getId());
         });
 
         itemPane.setOnContextMenuRequested(event ->
                 contextMenu.show(itemPane, event.getScreenX(), event.getScreenY()));
 
         itemPane.setOnMouseClicked(event -> {
-            if (currentItemId == item.getId()) {
+            if (currentItemId == item.getId() || !(event.getButton()==MouseButton.PRIMARY && event.getClickCount()==1)) {
                 return;
             }
 
@@ -210,6 +357,12 @@ public class MainController implements Initializable {
                     List<MessageItemPane> messageItemPanes = new ArrayList<>();
                     for (Message message : messages) {
                         MessageItemPane messageItemPane = new MessageItemPane(message);
+                        if (message.getType() == MessageType.TEXT_MESSAGE_SEND ||
+                                message.getType() == MessageType.TEXT_MESSAGE_RECEIVE) {
+                            Label msgLabel = (Label) messageItemPane.getChildren().get(1);
+                            msgLabel.maxWidthProperty().bind(rightAnchorPane.widthProperty().multiply(0.55));
+
+                        }
                         messageItemPanes.add(messageItemPane);
                     }
                     System.out.println(messages);
@@ -254,6 +407,38 @@ public class MainController implements Initializable {
         chatListItemService.addChatListItem(item);
         ChatListItemPane chatListItemPane = getChatListItemPane(item);
         chatVBox.getChildren().add(chatListItemPane);
+    }
+
+    /**
+     * 聊天按钮点击事件
+     *
+     */
+    public void onChatButtonClicked(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+            chatListItemPane.setContent(chatVBox);
+            if(weChatLogo.isVisible()){
+                return;
+            }
+            friendInfoPane.setVisible(false);
+            friendInfoPane.setManaged(false);
+            messageSplitPane.setVisible(true);
+            messageSplitPane.setManaged(true);
+            chatRecordButton.setVisible(true);
+            chatRecordButton.setManaged(true);
+            topNameLabel.setVisible(true);
+            topNameLabel.setManaged(true);
+
+        }
+    }
+
+
+    /**
+     * 通讯录按钮点击事件
+     */
+    public void onAddressListButtonClicked(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+            chatListItemPane.setContent(addressListVBox);
+        }
     }
 
     /**
@@ -365,6 +550,7 @@ public class MainController implements Initializable {
 
         }
     }
+
 
     /**
      * 窗口置顶

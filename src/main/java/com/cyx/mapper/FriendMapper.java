@@ -12,11 +12,11 @@ import java.util.List;
 public interface FriendMapper {
     void addFriend(Friend friend);
 
-    void deleteFriendById(int id);
+    void deleteFriendByUserId(int userId);
 
     void updateFriend(Friend friend);
 
     Friend getFriendById(int id);
 
-    List<Friend> getAllFriends();
+    List<Friend> getAllFriendsByUserId(int userId);
 }

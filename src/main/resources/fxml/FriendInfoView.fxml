@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="493.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label id="sign" layoutX="16.0" layoutY="93.0" style="-fx-text-fill: #999999;" text="自由自在" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="80.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView id="profile" fitHeight="60.0" fitWidth="60.0" layoutX="321.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+          <image>
+              <Image url="@/images/profile/wang1.jpeg" />
+          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="10.0" layoutY="207.0" text="备   注" textFill="#999999" AnchorPane.topAnchor="190.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="254.0" text="地   区" textFill="#999999" AnchorPane.topAnchor="220.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="297.0" text="微信号" textFill="#999999" AnchorPane.topAnchor="250.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="337.0" text="来   源" textFill="#999999" AnchorPane.topAnchor="280.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label id="remark" layoutX="119.0" layoutY="207.0" text="邹金财" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="190.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label id="region" layoutX="119.0" layoutY="254.0" text="广东  广州" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="220.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label id="weChatAccount" layoutX="119.0" layoutY="297.0" text="A111111" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="250.0" />
+      <Label id="from" layoutX="119.0" layoutY="337.0" text="通过群聊添加" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="280.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Line endX="373.6666564941406" endY="13.666671752929688" layoutX="8.0" layoutY="186.0" startX="4.5" startY="13.666671752929688" stroke="#d2d2d2" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="160.0" />
+      <Line endX="373.6666564941406" endY="13.666671752929688" layoutX="8.0" layoutY="367.0" startX="4.5" startY="13.666671752929688" stroke="#d2d2d2" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="340.0" />
+      <Button contentDisplay="CENTER" layoutX="170.0" layoutY="420.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #07c160;" text="发消息" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="367.6666666666667">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <HBox id="usernameHBox" alignment="CENTER_LEFT" layoutX="10.0" layoutY="84.0" prefHeight="35.0" prefWidth="200.0" spacing="5.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Label id="username" text="邹金财">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView id="sex" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/logo/profile_male.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin></ImageView>
+         </children>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

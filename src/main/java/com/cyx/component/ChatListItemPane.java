@@ -1,6 +1,7 @@
 package com.cyx.component;
 
 import com.cyx.pojo.ChatListItem;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 
@@ -35,9 +38,10 @@ public class ChatListItemPane extends AnchorPane {
             if (show) {
                 this.setStyle("-fx-background-color: #d6d6d6");
             } else {
-                this.setStyle("-fx-background-color: #f5f5f5");
+                this.setStyle("-fx-background-color: #e6e6e6");
             }
         });
+
 
         this.setPrefHeight(60);
         ImageView imageView = new ImageView(new Image(url));

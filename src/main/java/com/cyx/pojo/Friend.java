@@ -11,6 +11,13 @@ import lombok.NoArgsConstructor;
 public class Friend {
 
     int id;
+    int userId;
     String username;
     String url;
+    int sex;
+    String sign;
+    String remark;
+    String region;
+    String weChatAccount;
+    String from;
 }

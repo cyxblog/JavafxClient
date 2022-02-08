@@ -55,7 +55,7 @@ public class MessageItemPane extends AnchorPane {
 
         msgLabel.setPadding(new Insets(5, 10, 5, 10));
         msgLabel.setWrapText(true);
-        msgLabel.setMaxWidth(220);
+//        msgLabel.setMaxWidth(220);
 
         this.getChildren().addAll(profileView, msgLabel);
 

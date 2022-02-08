@@ -256,15 +256,24 @@
     -fx-background-color: transparent, white, transparent, white, transparent;
 }
 
-.main-chat-list-scroll-pane {
+.main-chat-list-scroll-pane .viewport {
     /*-fx-border-insets: 0;*/
+    -fx-border-style: none;
+    -fx-background-color: #e6e6e6;
+}
+
+.main-chat-list-scroll-pane .viewport:focused{
+    -fx-border-style: none;
+    -fx-border-color: transparent;
+    -fx-background-color: #e6e6e6;
+}
+
+.main-chat-list-scroll-pane{
     -fx-border-style: none;
     -fx-background-color: transparent;
 }
-
-.main-chat-list-scroll-pane:focused {
+.main-chat-list-scroll-pane:focused{
     -fx-border-style: none;
-    -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
 
