@@ -53,7 +53,10 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label id="weChatAccount" layoutX="119.0" layoutY="297.0" text="A111111" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="250.0" />
+      <Label id="weChatAccount" layoutX="119.0" layoutY="297.0" text="A111111" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="250.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <Label id="from" layoutX="119.0" layoutY="337.0" text="通过群聊添加" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="280.0">
          <font>
             <Font size="14.0" />
@@ -61,7 +64,7 @@
       </Label>
       <Line endX="373.6666564941406" endY="13.666671752929688" layoutX="8.0" layoutY="186.0" startX="4.5" startY="13.666671752929688" stroke="#d2d2d2" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="160.0" />
       <Line endX="373.6666564941406" endY="13.666671752929688" layoutX="8.0" layoutY="367.0" startX="4.5" startY="13.666671752929688" stroke="#d2d2d2" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="340.0" />
-      <Button contentDisplay="CENTER" layoutX="170.0" layoutY="420.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #07c160;" text="发消息" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="367.6666666666667">
+      <Button id="sendMessageButton" contentDisplay="CENTER" layoutX="170.0" layoutY="420.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #1aad19;" text="发消息" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="367.6666666666667">
          <font>
             <Font size="14.0" />
          </font>

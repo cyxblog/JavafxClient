@@ -2,27 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.cyx.mapper.UserMapper">
     <select id="getUserById" parameterType="Integer" resultType="User">
-        select * from user where id = #{id};
+        select * from client.user where id = #{id};
     </select>
 
     <select id="getAllUsers" resultType="User">
-        select * from user;
+        select * from client.user;
     </select>
 
     <insert id="addUser" parameterType="User">
-        insert into user (username, password, url)
-        values (#{username},#{password},#{url});
+        insert into client.user (username, password, url, weChatAccount)
+        values (#{username},#{password},#{url},#{weChatAccount});
     </insert>
 
     <delete id="deleteUserById" parameterType="Integer">
-        delete from user where id = #{id}
+        delete from client.user where id = #{id}
     </delete>
 
     <update id="updateUser" parameterType="User">
-        update user set
+        update client.user set
         username = #{username},
         password = #{password},
-        url = #{url}
+        url = #{url},
+        weChatAccount = #{weChatAccount}
         where
         id = #{id}
     </update>

@@ -5,12 +5,12 @@
         select * from message where id = #{id};
     </select>
 
-    <select id="getMessagesByUserId" parameterType="Integer" resultType="Message">
-        select * from message where userId = #{userId};
+    <select id="getMessagesByChatItemId" parameterType="Integer" resultType="Message">
+        select * from message where chatItemId = #{chatItemId};
     </select>
 
-    <select id="getLastMessageByUserId" parameterType="Integer" resultType="Message">
-        select * from message where userId = #{userId} order by id desc limit 1
+    <select id="getLastMessageByChatItemId" parameterType="Integer" resultType="Message">
+        select * from message where chatItemId = #{chatItemId} order by id desc limit 1
     </select>
 
     <select id="getAllMessages" resultType="Message">
@@ -18,21 +18,21 @@
     </select>
 
     <insert id="addMessage" parameterType="Message">
-        insert into message (userId, text, type, fileType, fileName, fileLength,filePath,url)
-        values (#{userId}, #{text},#{type},#{fileType},#{fileName},#{fileLength},#{filePath},#{url});
+        insert into message (chatItemId, text, type, fileType, fileName, fileLength,filePath,url)
+        values (#{chatItemId}, #{text},#{type},#{fileType},#{fileName},#{fileLength},#{filePath},#{url});
     </insert>
 
     <delete id="deleteMessageById" parameterType="Integer">
         delete from message where id = #{id}
     </delete>
 
-    <delete id="deleteMessageByUserId" parameterType="Integer">
-        delete from message where userId = #{userId}
+    <delete id="deleteMessagesByChatItemId" parameterType="Integer">
+        delete from message where chatItemId = #{chatItemId}
     </delete>
 
     <update id="updateMessage" parameterType="Message">
         update message set
-        userId = #{userId},
+        chatItemId = #{chatItemId},
         text = #{text},
         type = #{type}
         fileType = #{fileType}

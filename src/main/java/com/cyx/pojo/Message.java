@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Message {
 
     int id;
-    int userId;
+    int chatItemId;
     int type;
     String text;
     String fileName;

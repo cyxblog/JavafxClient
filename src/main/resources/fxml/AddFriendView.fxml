@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="493.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="107.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="110.0">
+          <image>
+              <Image url="@/images/profile/wang3.jpeg" />
+          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <TextField layoutX="107.0" layoutY="128.0" minHeight="25.0" prefHeight="25.0" prefWidth="189.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="120.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TextField>
+      <Label layoutX="107.0" layoutY="174.0" text="男" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="150.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <TextField layoutX="110.0" layoutY="177.0" minHeight="25.0" prefHeight="20.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="180.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="103.0" layoutY="207.0" minHeight="25.0" prefHeight="20.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="210.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="110.0" layoutY="237.0" minHeight="25.0" prefHeight="20.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="107.0" layoutY="326.0" text="LSUssdi" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="270.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label text="通过手机号添加" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="300.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="110.0" layoutY="408.0" minHeight="25.0" prefHeight="20.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="330.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Button layoutX="313.0" layoutY="328.0" minHeight="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: #d1d1d1;" text="选择..." AnchorPane.rightAnchor="25.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button contentDisplay="CENTER" layoutX="100.0" layoutY="387.0" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: #1aad19;" text="添加好友" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="397.6666666666667">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="43.0" layoutY="32.0" text="新的朋友" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="172.0" text="性   别" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="209.0" text="签   名" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="180.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="247.0" text="备   注" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="210.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="286.0" text="地   区" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="324.0" text="微信号" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="270.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="130.0" text="姓   名" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="120.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="358.0" text="来   源" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="300.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="90.0" text="头   像" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="90.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Line endX="226.33334350585938" endY="7.62939453125E-6" layoutX="131.0" layoutY="63.0" startX="-95.66667175292969" startY="2.288818359375E-5" stroke="#999999" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" />
+      <Label layoutX="45.0" layoutY="408.0" text="公   钥" textFill="#999999" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="330.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

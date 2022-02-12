@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChatListItem {
     int id;
+    int friendId;
     String url;
     String username;
     String message;

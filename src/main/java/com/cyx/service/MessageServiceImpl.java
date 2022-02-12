@@ -24,8 +24,8 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public void deleteMessageByUserId(int userId) {
-        messageMapper.deleteMessageByUserId(userId);
+    public void deleteMessagesByChatItemId(int chatItemId) {
+        messageMapper.deleteMessagesByChatItemId(chatItemId);
     }
 
     @Override
@@ -39,13 +39,13 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public Message getLastMessageByUserId(int userId) {
-        return messageMapper.getLastMessageByUserId(userId);
+    public Message getLastMessageByChatItemId(int chatItemId) {
+        return messageMapper.getLastMessageByChatItemId(chatItemId);
     }
 
     @Override
-    public List<Message> getMessagesByUserId(int userId) {
-        return messageMapper.getMessagesByUserId(userId);
+    public List<Message> getMessagesByChatItemId(int chatItemId) {
+        return messageMapper.getMessagesByChatItemId(chatItemId);
     }
 
     @Override

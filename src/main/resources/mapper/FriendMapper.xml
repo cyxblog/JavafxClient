@@ -5,13 +5,17 @@
         select * from friend where id = #{id};
     </select>
 
+    <select id="getLastFriendByUserId" parameterType="Integer" resultType="Friend">
+        select * from friend where userId = #{userId} order by id desc limit 1;
+    </select>
+
     <select id="getAllFriendsByUserId" resultType="Friend">
         select * from friend where userId = #{userId};
     </select>
 
     <insert id="addFriend" parameterType="Friend">
-        insert into friend ( username, url, userId, sign,remark,weChatAccount,from,sex,region)
-        values (#{username},#{url},#{userId},#{sign},#{remark},#{weChatAccount},#{from},#{sex},#{region});
+        insert into friend ( username, url, userId, sign,remark,weChatAccount,origin,sex,region,publicKeyPath)
+        values (#{username},#{url},#{userId},#{sign},#{remark},#{weChatAccount},#{origin},#{sex},#{region},#{publicKeyPath});
     </insert>
 
     <delete id="deleteFriendByUserId" parameterType="Integer">
@@ -26,9 +30,10 @@
         sign = #{sign},
         remark = #{remark},
         weChatAccount = #{weChatAccount},
-        from = #{from},
+        origin = #{origin},
         region = #{region},
-        userId = #{userId}
+        userId = #{userId},
+        publicKeyPath = #{publicKeyPath}
         where
         id = #{id}
     </update>

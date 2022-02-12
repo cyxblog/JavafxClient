@@ -8,6 +8,7 @@ import com.cyx.service.ChatListItemServiceImpl;
 import com.cyx.service.FriendServiceImpl;
 import com.cyx.service.MessageServiceImpl;
 import com.cyx.service.UserServiceImpl;
+import com.cyx.utils.DateUtils;
 import com.cyx.utils.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ class ClientApplicationTests {
     @Test
     void contextLoads() {
 //        File file = new File(FileUtils.getFileTypeImagePath("sss.docx"));
-        Message message = messageService.getLastMessageByUserId(1);
-        System.out.println(message);
+        User user = userService.getUserById(1);
+        System.out.println(user);
     }
 
 }

@@ -18,7 +18,7 @@
                 </ImageView>
                 <VBox prefHeight="280.0" prefWidth="55.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="71.0">
                     <children>
-                        <Button onMouseClicked="#onChatButtonClicked" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-chat-icon">
+                        <Button fx:id="chatButton" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onMouseClicked="#onChatButtonClicked" prefHeight="20.0" prefWidth="20.0" styleClass="main-chat-icon">
                             <tooltip>
                                 <Tooltip text="聊天" />
                             </tooltip>
@@ -26,7 +26,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button onMouseClicked="#onAddressListButtonClicked" fx:id="addressListButton" ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-album-icon">
+                        <Button fx:id="addressListButton" ellipsisString="" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onMouseClicked="#onAddressListButtonClicked" prefHeight="20.0" prefWidth="20.0" styleClass="main-album-icon">
                             <tooltip>
                                 <Tooltip text="通讯录" />
                             </tooltip>
@@ -89,7 +89,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button ellipsisString="" layoutX="27.0" layoutY="50.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="main-more-icon">
+                        <Button fx:id="moreButton" ellipsisString="" layoutX="27.0" layoutY="50.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onMouseClicked="#onMoreButtonClicked" prefHeight="20.0" prefWidth="20.0" styleClass="main-more-icon">
                             <tooltip>
                                 <Tooltip text="更多" />
                             </tooltip>
@@ -102,13 +102,21 @@
                         <Insets bottom="20.0" left="17.5" />
                     </padding>
                 </VBox>
+            <Label fx:id="chatCountsLabel" alignment="CENTER" style="-fx-background-color: #fa5151; -fx-background-radius: 8px;" text="35" textFill="WHITE" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="90.0">
+               <padding>
+                  <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
+               </padding>
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="middleAnchorPane" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" style="-fx-background-color: #f7f7f7;" styleClass="main-middle-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ScrollPane fx:id="chatListItemPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="main-chat-list-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
+                <ScrollPane fx:id="chatListScrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="main-chat-list-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0">
                     <content>
-                        <VBox fx:id="chatVBox" maxWidth="248.0" minWidth="248.0" prefWidth="248.0" style="-fx-background-color: transpanrent;" />
+                        <VBox fx:id="chatVBox" maxWidth="248.0" minWidth="248.0" prefWidth="248.0" style="-fx-background-color: transparent;" />
                     </content>
                 </ScrollPane>
                 <HBox fx:id="searchHBox" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5px;" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0">
@@ -151,7 +159,7 @@
                   </ScrollPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #ffffff;">
                             <children>
-                                <TextArea fx:id="inputTextArea" onDragDropped="#onFileDragDropped" onDragOver="#onFileDragOver" prefHeight="200.0" prefWidth="200.0" style="-fx-padding: 0 25px 0 25px;" styleClass="main-input-area" wrapText="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                <TextArea fx:id="inputTextArea" layoutY="38.0" onDragDropped="#onFileDragDropped" onDragOver="#onFileDragOver" prefHeight="200.0" prefWidth="200.0" style="-fx-padding: 0 25px 0 25px;" styleClass="main-input-area" wrapText="true" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0">
                            <font>
                               <Font name="Microsoft YaHei" size="14.0" />
                            </font></TextArea>
@@ -292,5 +300,36 @@
                 </ImageView>
             </children>
         </AnchorPane>
+      <VBox fx:id="moreVBox" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #2e2e2e;" styleClass="main-more-vbox" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="54.0">
+         <children>
+            <Label maxHeight="40.0" maxWidth="130.0" minHeight="42.0" minWidth="130.0" prefHeight="42.0" prefWidth="120.0" text="意见反馈" textFill="#8c8c8c">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label minHeight="42.0" minWidth="130.0" prefHeight="42.0" prefWidth="120.0" text="备份与恢复" textFill="#8c8c8c">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label minHeight="42.0" minWidth="130.0" prefHeight="42.0" prefWidth="120.0" text="设置" textFill="#8c8c8c">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </VBox>
     </children>
 </AnchorPane>

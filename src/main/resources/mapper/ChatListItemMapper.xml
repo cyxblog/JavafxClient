@@ -14,8 +14,8 @@
     </select>
 
     <insert id="addChatListItem" parameterType="ChatListItem">
-        insert into chat_list_item (url, username, message, date)
-        values (#{url},#{username},#{message},#{date});
+        insert into chat_list_item (url, username, message, date, friendId)
+        values (#{url},#{username},#{message},#{date},#{friendId});
     </insert>
 
     <delete id="deleteChatListItemById" parameterType="Integer">
@@ -24,9 +24,10 @@
 
     <update id="updateChatListItem" parameterType="ChatListItem">
         update chat_list_item set
-        url = #{url}
+        friendId = #{friendId},
+        url = #{url},
         username = #{username},
-        message = #{message}
+        message = #{message},
         date = #{date}
         where
         id = #{id}

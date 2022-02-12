@@ -181,54 +181,59 @@ public class MessageItemPane extends AnchorPane {
         profileView.setFitWidth(35);
         profileView.setFitHeight(35);
 
-        ImageView imageView = new ImageView(new Image("file:" + filePath));
+        AnchorPane imagePane = new AnchorPane();
+        imagePane.setStyle("-fx-background-color: white");
 
+        ImageView imageView = new ImageView(new Image("file:" + filePath));
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(220);
         imageView.setFitWidth(220);
 
-        imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
-                    try {
-                        Desktop.getDesktop().open(new File(filePath));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 1) {
-                    ContextMenu contextMenu = new ContextMenu();
-                    MenuItem copyItem = new MenuItem("复制");
-                    MenuItem editItem = new MenuItem("编辑");
-                    MenuItem forwardItem = new MenuItem("转发");
-                    MenuItem collectItem = new MenuItem("收藏");
-                    MenuItem multiChoicesItem = new MenuItem("多选");
-                    MenuItem referenceItem = new MenuItem("引用");
-                    MenuItem anotherSaveItem = new MenuItem("另存为...");
-                    MenuItem showOnDirItem = new MenuItem("在文件夹中显示");
-                    MenuItem deleteItem = new MenuItem("删除");
+        imagePane.getChildren().add(imageView);
+        AnchorPane.setLeftAnchor(imageView, 0.0);
+        AnchorPane.setTopAnchor(imageView, 0.0);
+        AnchorPane.setRightAnchor(imageView, 0.0);
+        AnchorPane.setBottomAnchor(imageView, 0.0);
 
-                    contextMenu.getItems().addAll(copyItem, editItem,forwardItem, collectItem, multiChoicesItem,
-                            referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
-
-                    showOnDirItem.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-
-                            try {
-                                File fileDir = new File(filePath).getParentFile();
-                                Desktop.getDesktop().open(fileDir);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                    contextMenu.show(imageView, event.getScreenX(), event.getScreenY());
+        imageView.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                try {
+                    Desktop.getDesktop().open(new File(filePath));
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+            } else if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 1) {
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem copyItem = new MenuItem("复制");
+                MenuItem editItem = new MenuItem("编辑");
+                MenuItem forwardItem = new MenuItem("转发");
+                MenuItem collectItem = new MenuItem("收藏");
+                MenuItem multiChoicesItem = new MenuItem("多选");
+                MenuItem referenceItem = new MenuItem("引用");
+                MenuItem anotherSaveItem = new MenuItem("另存为...");
+                MenuItem showOnDirItem = new MenuItem("在文件夹中显示");
+                MenuItem deleteItem = new MenuItem("删除");
+
+                contextMenu.getItems().addAll(copyItem, editItem,forwardItem, collectItem, multiChoicesItem,
+                        referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
+
+                showOnDirItem.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+
+                        try {
+                            File fileDir = new File(filePath).getParentFile();
+                            Desktop.getDesktop().open(fileDir);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                contextMenu.show(imageView, event.getScreenX(), event.getScreenY());
             }
         });
 
-        this.getChildren().addAll(imageView, profileView);
+        this.getChildren().addAll(imagePane, profileView);
 
         if (type == MessageType.IMAGE_MESSAGE_RECEIVE) {
 
@@ -239,8 +244,8 @@ public class MessageItemPane extends AnchorPane {
         } else {
             AnchorPane.setRightAnchor(profileView, 25.0);
             AnchorPane.setTopAnchor(profileView, 10.0);
-            AnchorPane.setRightAnchor(imageView, 70.0);
-            AnchorPane.setTopAnchor(imageView, 10.0);
+            AnchorPane.setRightAnchor(imagePane, 70.0);
+            AnchorPane.setTopAnchor(imagePane, 10.0);
         }
 
 

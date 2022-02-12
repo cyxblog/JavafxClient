@@ -2,10 +2,10 @@
     -fx-background-color: transparent;
     -fx-border-style: none;
     -fx-border-radius: 0;
-    -fx-background-size: 20px 20px;
+    -fx-background-size: 25px 25px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-    -fx-background-image: url("/images/button/bubble.png");
+    -fx-background-image: url("/images/button/bubble_focus.png");
 }
 
 .main-album-icon {
@@ -32,7 +32,7 @@
     -fx-background-color: transparent;
     -fx-border-style: none;
     -fx-border-radius: 0;
-    -fx-background-size: 18px 18px;
+    -fx-background-size: 15px 15px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-image: url("/images/button/folder.png");

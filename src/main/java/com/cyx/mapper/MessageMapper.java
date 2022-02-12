@@ -14,15 +14,15 @@ public interface MessageMapper {
 
     void deleteMessageById(int id);
 
-    void deleteMessageByUserId(int userId);
+    void deleteMessagesByChatItemId(int chatItemId);
 
     void updateMessage(Message message);
 
     Message getMessageById(int id);
 
-    Message getLastMessageByUserId(int userId);
+    Message getLastMessageByChatItemId(int chatItemId);
 
-    List<Message> getMessagesByUserId(int userId);
+    List<Message> getMessagesByChatItemId(int chatItemId);
 
     List<Message> getAllMessages();
 }

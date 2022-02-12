@@ -13,5 +13,7 @@ public interface FriendService {
 
     Friend getFriendById(int id);
 
+    Friend getLastFriendByUserId(int userId);
+
     List<Friend> getAllFriendsByUserId(int userId);
 }

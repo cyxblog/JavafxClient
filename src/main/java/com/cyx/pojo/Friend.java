@@ -19,5 +19,6 @@ public class Friend {
     String remark;
     String region;
     String weChatAccount;
-    String from;
+    String origin;
+    String publicKeyPath;
 }

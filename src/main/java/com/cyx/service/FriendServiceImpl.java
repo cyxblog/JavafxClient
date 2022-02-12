@@ -33,6 +33,11 @@ public class FriendServiceImpl implements FriendService{
     }
 
     @Override
+    public Friend getLastFriendByUserId(int userId) {
+        return friendMapper.getLastFriendByUserId(userId);
+    }
+
+    @Override
     public List<Friend> getAllFriendsByUserId(int userId) {
         return friendMapper.getAllFriendsByUserId(userId);
     }
