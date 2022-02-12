@@ -5,13 +5,21 @@
         select * from client.user where id = #{id};
     </select>
 
+    <select id="getUserByUsername" parameterType="String" resultType="User">
+        select * from client.user where username = #{username};
+    </select>
+
+    <select id="getUserByLoginState" parameterType="Integer" resultType="User">
+        select * from client.user where loginState = #{loginState} limit 1;
+    </select>
+
     <select id="getAllUsers" resultType="User">
         select * from client.user;
     </select>
 
     <insert id="addUser" parameterType="User">
-        insert into client.user (username, password, url, weChatAccount)
-        values (#{username},#{password},#{url},#{weChatAccount});
+        insert into client.user (username, password, url, weChatAccount,loginState)
+        values (#{username},#{password},#{url},#{weChatAccount},#{loginState});
     </insert>
 
     <delete id="deleteUserById" parameterType="Integer">
@@ -23,8 +31,19 @@
         username = #{username},
         password = #{password},
         url = #{url},
-        weChatAccount = #{weChatAccount}
+        weChatAccount = #{weChatAccount},
+        loginState = #{loginState}
         where
         id = #{id}
+    </update>
+
+    <update id="updateUserByUsername" parameterType="User">
+        update client.user set
+        password = #{password},
+        url = #{url},
+        weChatAccount = #{weChatAccount},
+        loginState = #{loginState}
+        where
+        username = #{username}
     </update>
 </mapper>

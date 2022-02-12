@@ -5,8 +5,13 @@
         select * from chat_list_item where id = #{id};
     </select>
 
-    <select id="getLastOneItem" resultType="ChatListItem">
-        select * from chat_list_item order by id desc limit 1
+    <select id="getLastOneItemByUserId" resultType="ChatListItem">
+        select * from chat_list_item where userId = #{userId}
+        order by id desc limit 1
+    </select>
+
+    <select id="getChatListItemsByUserId" parameterType="Integer" resultType="ChatListItem">
+        select * from chat_list_item where userId = #{userId}
     </select>
 
     <select id="getAllChatListItems" resultType="ChatListItem">
@@ -14,16 +19,17 @@
     </select>
 
     <insert id="addChatListItem" parameterType="ChatListItem">
-        insert into chat_list_item (url, username, message, date, friendId)
-        values (#{url},#{username},#{message},#{date},#{friendId});
+        insert into chat_list_item (userId, url, username, message, date, friendId)
+        values (#{userId},#{url},#{username},#{message},#{date},#{friendId});
     </insert>
 
     <delete id="deleteChatListItemById" parameterType="Integer">
-        delete from chat_list_item where id = #{id}
+        delete from chat_list_item where id = #{id};
     </delete>
 
     <update id="updateChatListItem" parameterType="ChatListItem">
         update chat_list_item set
+        userId = #{userId},
         friendId = #{friendId},
         url = #{url},
         username = #{username},

@@ -11,7 +11,7 @@
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="55.0" style="-fx-background-color: #2e2e2e;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="36.0">
+                <ImageView fx:id="currentUserProfile" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="36.0">
                     <image>
                         <Image url="@../images/profile/wangwang.jpg" />
                     </image>

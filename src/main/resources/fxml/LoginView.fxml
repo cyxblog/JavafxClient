@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="loginView" maxHeight="380.0" maxWidth="280.0" minHeight="380.0" minWidth="280.0" prefHeight="380.0" prefWidth="280.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cyx.controller.LoginController">
    <children>
-      <Label text="微信" textFill="#b2b2b2" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0">
+      <Label fx:id="topicLabel" text="微信" textFill="#b2b2b2" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -46,7 +46,7 @@
             <Image url="@../images/profile/wangwang.jpg" />
          </image>
       </ImageView>
-      <Label text="耳东人衣兴" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="180.0">
+      <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" text="耳东人衣兴" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="180.0">
          <font>
             <Font size="20.0" />
          </font>
@@ -58,7 +58,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Label text="切换账号" textFill="#6683a8" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="65.0">
+      <Label fx:id="changeAccountLabel" onMouseClicked="#onChangeAccount" text="切换账号" textFill="#6683a8" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="65.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -66,7 +66,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label text="仅传输文件" textFill="#6683a8" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="55.0">
+      <Label fx:id="onlyTransformFileLabel" text="仅传输文件" textFill="#6683a8" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="55.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -74,6 +74,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Line endX="50.0" endY="45.0" startX="50.0" startY="55.0" stroke="#e2e2e2" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="140.0" />
+      <Line fx:id="line" endX="50.0" endY="45.0" startX="50.0" startY="55.0" stroke="#e2e2e2" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="140.0" />
    </children>
 </AnchorPane>
