@@ -1,6 +1,7 @@
 package com.cyx.service;
 
 import com.cyx.pojo.Friend;
+import com.cyx.pojo.User;
 
 import java.util.List;
 

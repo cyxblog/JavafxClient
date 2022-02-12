@@ -15,4 +15,5 @@ public class User {
     String password;
     String url;
     String weChatAccount;
+    int loginState;
 }

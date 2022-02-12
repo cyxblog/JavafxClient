@@ -16,9 +16,11 @@ public interface ChatListItemMapper {
 
     void updateChatListItem(ChatListItem chatListItem);
 
-    ChatListItem getLastOneItem();
+    ChatListItem getLastOneItemByUserId(int userId);
 
     ChatListItem getChatListItemById(int id);
+
+    List<ChatListItem> getChatListItemsByUserId(int userId);
 
     List<ChatListItem> getAllChatListItems();
 }

@@ -1,6 +1,8 @@
 package com.cyx.component;
 
+import com.cyx.constant.LoginState;
 import com.cyx.pojo.User;
+import com.cyx.service.UserService;
 import com.cyx.service.UserServiceImpl;
 import de.felixroske.jfxsupport.FXMLView;
 import javafx.beans.value.ChangeListener;
@@ -24,12 +26,7 @@ import javafx.scene.text.Font;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
-import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -40,17 +37,15 @@ public class SettingsPane extends AnchorPane {
 
     private final Stage mainStage;
 
-    private String profileUrl;
-    private String username;
-    private String weChatAccount;
+    private User user;
 
-    public SettingsPane(Stage mainStage, String profileUrl, String username, String weChatAccount) {
+    private UserServiceImpl userService;
+
+    public SettingsPane(Stage mainStage, User user, UserServiceImpl userService) {
 
         this.mainStage = mainStage;
-        this.profileUrl = profileUrl;
-        this.username = username;
-        this.weChatAccount = weChatAccount;
-
+        this.user = user;
+        this.userService = userService;
         initView();
 
     }
@@ -288,7 +283,7 @@ public class SettingsPane extends AnchorPane {
 
     private void setAccountSettingsView(AnchorPane publicPane) {
 
-        ImageView profile = new ImageView(new Image(profileUrl));
+        ImageView profile = new ImageView(new Image("file:" + user.getUrl()));
         profile.setFitHeight(50);
         profile.setFitWidth(50);
         profile.setStyle("-fx-background-radius: 5px");
@@ -298,10 +293,10 @@ public class SettingsPane extends AnchorPane {
         clip.setArcWidth(10);
         profile.setClip(clip);
 
-        Label usernameLabel = new Label(username);
+        Label usernameLabel = new Label(user.getUsername());
         usernameLabel.setFont(Font.font(20));
 
-        Label weChatLabel = new Label("微信号：" + weChatAccount);
+        Label weChatLabel = new Label("微信号：" + user.getWeChatAccount());
         weChatLabel.setFont(Font.font(12));
         weChatLabel.setTextFill(Paint.valueOf("#999999"));
 
@@ -345,6 +340,9 @@ public class SettingsPane extends AnchorPane {
         });
         loginOutButton.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1 && event.getButton() == MouseButton.PRIMARY) {
+                user.setLoginState(LoginState.NOT_LOGIN);
+                userService.updateUserByUsername(user);
+
                 mainStage.close();
             }
         });

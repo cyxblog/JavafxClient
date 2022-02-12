@@ -30,13 +30,18 @@ public class ChatListItemServiceImpl implements ChatListItemService{
     }
 
     @Override
-    public ChatListItem getLastOneItem() {
-        return chatListItemMapper.getLastOneItem();
+    public ChatListItem getLastOneItemByUserId(int userId) {
+        return chatListItemMapper.getLastOneItemByUserId(userId);
     }
 
     @Override
     public ChatListItem getChatListItemById(int id) {
         return chatListItemMapper.getChatListItemById(id);
+    }
+
+    @Override
+    public List<ChatListItem> getChatListItemsByUserId(int userId) {
+        return chatListItemMapper.getChatListItemsByUserId(userId);
     }
 
     @Override

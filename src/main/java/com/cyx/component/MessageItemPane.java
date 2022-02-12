@@ -3,10 +3,12 @@ package com.cyx.component;
 import com.cyx.constant.MessageType;
 import com.cyx.pojo.Message;
 import com.cyx.utils.FileUtils;
+import com.sun.glass.ui.monocle.util.C;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -47,7 +49,7 @@ public class MessageItemPane extends AnchorPane {
     public void setTextPane(String url, String text, int type) {
 
 
-        ImageView profileView = new ImageView(new Image(url));
+        ImageView profileView = new ImageView(new Image("file:" + url));
         profileView.setFitWidth(35);
         profileView.setFitHeight(35);
         Label msgLabel = new Label(text);
@@ -77,7 +79,7 @@ public class MessageItemPane extends AnchorPane {
     }
 
     private void setFilePane(String url, String fileName, long fileLength, String filePath, int type) {
-        ImageView profileView = new ImageView(new Image(url));
+        ImageView profileView = new ImageView(new Image("file:" + url));
         profileView.setFitWidth(35);
         profileView.setFitHeight(35);
         ImageView fileImage = new ImageView(new Image(FileUtils.getFileTypeImagePath(fileName)));
@@ -97,6 +99,7 @@ public class MessageItemPane extends AnchorPane {
         filePane.setStyle("-fx-background-color: white");
         filePane.setPrefWidth(220);
         filePane.setPrefHeight(90);
+        filePane.setCursor(Cursor.HAND);
         filePane.getChildren().addAll(fileImage, fileNameLabel, fileLengthLabel, metaLabel);
         filePane.hoverProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean show) -> {
             if (show) {
@@ -129,16 +132,13 @@ public class MessageItemPane extends AnchorPane {
                     contextMenu.getItems().addAll(copyItem, forwardItem, collectItem, multiChoicesItem,
                             referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
 
-                    showOnDirItem.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
+                    showOnDirItem.setOnAction(event1 -> {
 
-                            try {
-                                File fileDir = new File(filePath).getParentFile();
-                                Desktop.getDesktop().open(fileDir);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                        try {
+                            File fileDir = new File(filePath).getParentFile();
+                            Desktop.getDesktop().open(fileDir);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     });
                     contextMenu.show(filePane, event.getScreenX(), event.getScreenY());
@@ -177,7 +177,7 @@ public class MessageItemPane extends AnchorPane {
 
     private void setImagePane(String url, String filePath, int type) {
 
-        ImageView profileView = new ImageView(new Image(url));
+        ImageView profileView = new ImageView(new Image("file:" + url));
         profileView.setFitWidth(35);
         profileView.setFitHeight(35);
 
@@ -185,6 +185,7 @@ public class MessageItemPane extends AnchorPane {
         imagePane.setStyle("-fx-background-color: white");
 
         ImageView imageView = new ImageView(new Image("file:" + filePath));
+        imageView.setCursor(Cursor.HAND);
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(220);
         imageView.setFitWidth(220);
@@ -214,7 +215,7 @@ public class MessageItemPane extends AnchorPane {
                 MenuItem showOnDirItem = new MenuItem("在文件夹中显示");
                 MenuItem deleteItem = new MenuItem("删除");
 
-                contextMenu.getItems().addAll(copyItem, editItem,forwardItem, collectItem, multiChoicesItem,
+                contextMenu.getItems().addAll(copyItem, editItem, forwardItem, collectItem, multiChoicesItem,
                         referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
 
                 showOnDirItem.setOnAction(new EventHandler<ActionEvent>() {

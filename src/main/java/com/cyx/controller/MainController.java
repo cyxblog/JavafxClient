@@ -3,6 +3,7 @@ package com.cyx.controller;
 
 import com.cyx.ClientApplication;
 import com.cyx.component.*;
+import com.cyx.constant.LoginState;
 import com.cyx.constant.MessageType;
 import com.cyx.handler.DragWindowHandler;
 import com.cyx.pojo.ChatListItem;
@@ -65,6 +66,9 @@ public class MainController implements Initializable {
 
     @FXML
     private AnchorPane mainView;
+
+    @FXML
+    private ImageView currentUserProfile;
 
     @FXML
     private AnchorPane middleAnchorPane;
@@ -151,6 +155,8 @@ public class MainController implements Initializable {
 
     int currentItemId = -1;
 
+    private User currentUser;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -165,6 +171,10 @@ public class MainController implements Initializable {
      * 初始化数据渲染
      */
     public void initView() throws IOException {
+
+        currentUser = userService.getUserByLoginState(LoginState.IS_LOGIN);
+
+        currentUserProfile.setImage(new Image("file:" + currentUser.getUrl()));
 
         mainStage = ClientApplication.getStage();
 
@@ -186,7 +196,7 @@ public class MainController implements Initializable {
 
         messageVBox.prefWidthProperty().bind(messageSplitPane.widthProperty());
 
-        List<ChatListItem> allChatListItems = chatListItemService.getAllChatListItems();
+        List<ChatListItem> allChatListItems = chatListItemService.getChatListItemsByUserId(currentUser.getId());
         currentChatListItems.addAll(allChatListItems);
         List<ChatListItemPane> itemPanes = new ArrayList<>();
         for (ChatListItem item : allChatListItems) {
@@ -216,7 +226,8 @@ public class MainController implements Initializable {
             chatCountsLabel.setText(String.valueOf(allChatListItems.size()));
         }
 
-        List<Friend> friendList = friendService.getAllFriendsByUserId(1);
+
+        List<Friend> friendList = friendService.getAllFriendsByUserId(currentUser.getId());
         List<FriendListItemPane> friendListItemPanes = new ArrayList<>();
         for (Friend friend : friendList) {
             String url = friend.getUrl();
@@ -346,8 +357,6 @@ public class MainController implements Initializable {
                         });
                         child.setOnMouseClicked(event -> {
 
-
-                            showChatView();
                             chatListScrollPane.setContent(chatVBox);
 
                             int index = 0;
@@ -361,10 +370,10 @@ public class MainController implements Initializable {
                             if (index == currentChatListItems.size()) {
 
 
-                                ChatListItem newChatListItem = new ChatListItem(-1, currentFriend.getId(),
+                                ChatListItem newChatListItem = new ChatListItem(-1, currentUser.getId(), currentFriend.getId(),
                                         currentFriend.getUrl(), currentFriend.getUsername(), "", DateUtils.currentTime());
                                 chatListItemService.addChatListItem(newChatListItem);
-                                ChatListItem lastChatListItem = chatListItemService.getLastOneItem();
+                                ChatListItem lastChatListItem = chatListItemService.getLastOneItemByUserId(currentUser.getId());
                                 newChatListItem.setId(lastChatListItem.getId());
                                 currentChatListItems.add(newChatListItem);
                                 chatVBox.getChildren().add(getChatListItemPane(newChatListItem));
@@ -378,6 +387,10 @@ public class MainController implements Initializable {
                                 topNameLabel.setText(currentFriend.getUsername());
 
                             });
+
+                            chatButton.setStyle("-fx-background-image: url(/images/button/bubble_focus.png)");
+                            addressListButton.setStyle("-fx-background-image: url(/images/button/album.png)");
+                            showChatView();
 
                         });
                         break;
@@ -458,14 +471,15 @@ public class MainController implements Initializable {
                 } else {
 
 
-                    Friend friend = new Friend(-1, 1, usernameTF.getText(), addFriendPaneProfileUrl,
+                    Friend friend = new Friend(-1, currentUser.getId(), usernameTF.getText(), addFriendPaneProfileUrl,
                             sexLabel.getText().equals("男") ? 1 : 0, signTF.getText(), remarkTF.getText(),
                             regionTF.getText(), weChatLabel.getText(), fromLabel.getText(),
                             publicKeyTF.getText());
 
                     friendService.addFriend(friend);
-                    Friend lastFriend = friendService.getLastFriendByUserId(1);
+                    Friend lastFriend = friendService.getLastFriendByUserId(currentUser.getId());
                     friend.setId(lastFriend.getId());
+
                     FriendListItemPane friendListItemPane = new FriendListItemPane(addFriendPaneProfileUrl, usernameTF.getText());
                     friendListItemPane.setOnMouseClicked(event1 -> {
                         if (event.getClickCount() == 1 && event.getButton() == MouseButton.PRIMARY) {
@@ -480,18 +494,29 @@ public class MainController implements Initializable {
     }
 
     private void showChatView() {
+        if(chatVBox.getChildren().size()==0){
+            weChatLogo.setVisible(true);
+            weChatLogo.setManaged(true);
+            messageSplitPane.setVisible(false);
+            messageSplitPane.setManaged(false);
+            chatRecordButton.setVisible(false);
+            chatRecordButton.setManaged(false);
+            topNameLabel.setVisible(false);
+            topNameLabel.setManaged(false);
+        }else{
+            weChatLogo.setVisible(false);
+            weChatLogo.setManaged(false);
+            messageSplitPane.setVisible(true);
+            messageSplitPane.setManaged(true);
+            chatRecordButton.setVisible(true);
+            chatRecordButton.setManaged(true);
+            topNameLabel.setVisible(true);
+            topNameLabel.setManaged(true);
+        }
         friendInfoPane.setVisible(false);
         friendInfoPane.setManaged(false);
         addFriendPane.setVisible(false);
         addFriendPane.setManaged(false);
-        messageSplitPane.setVisible(true);
-        messageSplitPane.setManaged(true);
-        chatRecordButton.setVisible(true);
-        chatRecordButton.setManaged(true);
-        topNameLabel.setVisible(true);
-        topNameLabel.setManaged(true);
-        weChatLogo.setVisible(false);
-        weChatLogo.setManaged(false);
     }
 
     private void showAddFriendPane() {
@@ -546,13 +571,9 @@ public class MainController implements Initializable {
      */
     private void showSettingsView() {
 
-        User user = userService.getUserById(1);
-        String profileUrl = user.getUrl();
-        String username = user.getUsername();
-        String weChatAccount = user.getWeChatAccount();
 
         Stage settingsStage = new Stage();
-        AnchorPane settingsPane = new SettingsPane(mainStage,profileUrl,username,weChatAccount);
+        AnchorPane settingsPane = new SettingsPane(mainStage, currentUser, userService);
         Scene settingsScene = new Scene(settingsPane);
         settingsStage.setScene(settingsScene);
         settingsStage.initOwner(mainStage);
@@ -682,8 +703,8 @@ public class MainController implements Initializable {
         if (text.equals("")) {
             return;
         }
-        User user = userService.getUserById(1);
-        String url = user.getUrl();
+
+        String url = currentUser.getUrl();
 
         Message message = new Message(-1, currentItemId, MessageType.TEXT_MESSAGE_SEND,
                 text, null, 0, null, null, url);
@@ -784,8 +805,8 @@ public class MainController implements Initializable {
         } else {
             type = MessageType.FILE_MESSAGE_SEND;
         }
-        User user = userService.getUserById(1);
-        String url = user.getUrl();
+
+        String url = currentUser.getUrl();
         Message message = new Message(-1, currentItemId, type,
                 null, fileName, fileLength, fileType, filePath, url);
         messageService.addMessage(message);
@@ -906,6 +927,8 @@ public class MainController implements Initializable {
      * 窗口关闭
      */
     public void onWindowClosed() {
+        currentUser.setLoginState(LoginState.NOT_LOGIN);
+        userService.updateUserByUsername(currentUser);
         mainStage.close();
     }
 }

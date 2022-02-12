@@ -17,7 +17,13 @@ public interface UserMapper {
 
     void updateUser(User user);
 
+    void updateUserByUsername(User user);
+
     User getUserById(int id);
+
+    User getUserByLoginState(int loginState);
+
+    User getUserByUsername(String username);
 
     List<User> getAllUsers();
 
