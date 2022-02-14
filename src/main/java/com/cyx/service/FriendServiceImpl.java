@@ -38,6 +38,11 @@ public class FriendServiceImpl implements FriendService{
     }
 
     @Override
+    public Friend getFriendByUserIdAndUsername(int userId, String username) {
+        return friendMapper.getFriendByUserIdAndUsername(userId, username);
+    }
+
+    @Override
     public List<Friend> getAllFriendsByUserId(int userId) {
         return friendMapper.getAllFriendsByUserId(userId);
     }

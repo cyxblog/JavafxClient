@@ -37,9 +37,9 @@ public class SettingsPane extends AnchorPane {
 
     private final Stage mainStage;
 
-    private User user;
+    private final User user;
 
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
 
     public SettingsPane(Stage mainStage, User user, UserServiceImpl userService) {
 

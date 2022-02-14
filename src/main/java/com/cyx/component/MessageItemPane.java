@@ -4,12 +4,13 @@ import com.cyx.constant.MessageType;
 import com.cyx.pojo.Message;
 import com.cyx.utils.FileUtils;
 import com.sun.glass.ui.monocle.util.C;
+import com.sun.javafx.scene.control.skin.ProgressIndicatorSkin;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
-import javafx.scene.control.ContextMenu;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -20,6 +21,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 
 import java.awt.*;
@@ -57,8 +65,6 @@ public class MessageItemPane extends AnchorPane {
 
         msgLabel.setPadding(new Insets(5, 10, 5, 10));
         msgLabel.setWrapText(true);
-//        msgLabel.setMaxWidth(220);
-
         this.getChildren().addAll(profileView, msgLabel);
 
         if (type == MessageType.TEXT_MESSAGE_RECEIVE) {
@@ -95,12 +101,13 @@ public class MessageItemPane extends AnchorPane {
         metaLabel.setFont(new Font(12));
         metaLabel.setStyle("-fx-text-fill: #dadada");
 
+        AnchorPane progressPane = getProgressPane();
+
         AnchorPane filePane = new AnchorPane();
         filePane.setStyle("-fx-background-color: white");
         filePane.setPrefWidth(220);
         filePane.setPrefHeight(90);
         filePane.setCursor(Cursor.HAND);
-        filePane.getChildren().addAll(fileImage, fileNameLabel, fileLengthLabel, metaLabel);
         filePane.hoverProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean show) -> {
             if (show) {
                 filePane.setStyle("-fx-background-color: #f7f7f7");
@@ -109,42 +116,47 @@ public class MessageItemPane extends AnchorPane {
             }
         });
 
-        filePane.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+        filePane.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
+                try {
+                    File file = new File(filePath);
+                    Desktop.getDesktop().open(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 1) {
+                ContextMenu contextMenu = new ContextMenu();
+                MenuItem copyItem = new MenuItem("复制");
+                MenuItem forwardItem = new MenuItem("转发");
+                MenuItem collectItem = new MenuItem("收藏");
+                MenuItem multiChoicesItem = new MenuItem("多选");
+                MenuItem referenceItem = new MenuItem("引用");
+                MenuItem anotherSaveItem = new MenuItem("另存为...");
+                MenuItem showOnDirItem = new MenuItem("在文件夹中显示");
+                MenuItem deleteItem = new MenuItem("删除");
+
+                contextMenu.getItems().addAll(copyItem, forwardItem, collectItem, multiChoicesItem,
+                        referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
+
+                showOnDirItem.setOnAction(event1 -> {
+
                     try {
-                        Desktop.getDesktop().open(new File(filePath));
+                        File file = new File(filePath);
+                        Desktop.getDesktop().open(file);
+                        File fileDir = file.getParentFile();
+                        Desktop.getDesktop().open(fileDir);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                } else if (event.getButton() == MouseButton.SECONDARY && event.getClickCount() == 1) {
-                    ContextMenu contextMenu = new ContextMenu();
-                    MenuItem copyItem = new MenuItem("复制");
-                    MenuItem forwardItem = new MenuItem("转发");
-                    MenuItem collectItem = new MenuItem("收藏");
-                    MenuItem multiChoicesItem = new MenuItem("多选");
-                    MenuItem referenceItem = new MenuItem("引用");
-                    MenuItem anotherSaveItem = new MenuItem("另存为...");
-                    MenuItem showOnDirItem = new MenuItem("在文件夹中显示");
-                    MenuItem deleteItem = new MenuItem("删除");
-
-                    contextMenu.getItems().addAll(copyItem, forwardItem, collectItem, multiChoicesItem,
-                            referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
-
-                    showOnDirItem.setOnAction(event1 -> {
-
-                        try {
-                            File fileDir = new File(filePath).getParentFile();
-                            Desktop.getDesktop().open(fileDir);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    contextMenu.show(filePane, event.getScreenX(), event.getScreenY());
-                }
+                });
+                contextMenu.show(filePane, event.getScreenX(), event.getScreenY());
             }
         });
+
+        filePane.getChildren().addAll(progressPane, fileImage, fileNameLabel, fileLengthLabel, metaLabel);
+
+        AnchorPane.setRightAnchor(progressPane, 70.0);
+        AnchorPane.setTopAnchor(progressPane, 10.0);
 
         AnchorPane.setLeftAnchor(fileNameLabel, 10.0);
         AnchorPane.setTopAnchor(fileNameLabel, 5.0);
@@ -173,6 +185,61 @@ public class MessageItemPane extends AnchorPane {
             AnchorPane.setTopAnchor(filePane, 10.0);
         }
 
+    }
+
+    private AnchorPane getProgressPane() {
+        Arc arc = new Arc();
+        arc.setRadiusX(10);
+        arc.setRadiusY(10);
+        arc.setLength(120);
+        arc.setType(ArcType.ROUND);
+        arc.setStartAngle(90);
+        arc.setFill(Paint.valueOf("#ffffff"));
+        arc.setStroke(Paint.valueOf("transparent"));
+
+        Circle base = new Circle();
+        base.setRadius(10);
+        base.setFill(Paint.valueOf("#414141"));
+        base.setStroke(Paint.valueOf("transparent"));
+
+        Circle circle = new Circle();
+        circle.setRadius(8);
+        circle.setFill(Paint.valueOf("#616161"));
+        circle.setStroke(Paint.valueOf("transparent"));
+
+        Line line1 = new Line(15, 0, 15, 5);
+        line1.setStrokeWidth(2);
+        line1.setStroke(Paint.valueOf("#ffffff"));
+        Line line2 = new Line(15, 0, 15, 5);
+        line2.setStrokeWidth(2);
+        line2.setStroke(Paint.valueOf("#ffffff"));
+
+        HBox lineBox = new HBox();
+        lineBox.setSpacing(2);
+        lineBox.getChildren().addAll(line1, line2);
+
+        ImageView baseFileIV = new ImageView(new Image("/images/file/base_file.png"));
+        baseFileIV.setFitHeight(45);
+        baseFileIV.setFitWidth(40);
+
+        AnchorPane progressPane = new AnchorPane();
+        progressPane.setPrefWidth(40);
+        progressPane.setPrefHeight(45);
+        progressPane.setStyle("-fx-background-color: #d1d1d1");
+
+        progressPane.getChildren().addAll(baseFileIV, base, arc, circle, lineBox);
+
+        AnchorPane.setLeftAnchor(baseFileIV, 0.0);
+        AnchorPane.setTopAnchor(baseFileIV, 0.0);
+        AnchorPane.setLeftAnchor(base, 9.5);
+        AnchorPane.setTopAnchor(base, 14.3);
+        AnchorPane.setLeftAnchor(arc, 9.0);
+        AnchorPane.setTopAnchor(arc, 14.0);
+        AnchorPane.setLeftAnchor(circle, 11.6);
+        AnchorPane.setTopAnchor(circle, 16.5);
+        AnchorPane.setLeftAnchor(lineBox, 17.8);
+        AnchorPane.setTopAnchor(lineBox, 21.5);
+        return progressPane;
     }
 
     private void setImagePane(String url, String filePath, int type) {

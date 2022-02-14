@@ -20,5 +20,7 @@ public interface FriendMapper {
 
     Friend getLastFriendByUserId(int userId);
 
+    Friend getFriendByUserIdAndUsername(int userId, String username);
+
     List<Friend> getAllFriendsByUserId(int userId);
 }
