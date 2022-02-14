@@ -9,6 +9,10 @@
         select * from friend where userId = #{userId} order by id desc limit 1;
     </select>
 
+    <select id="getFriendByUserIdAndUsername" resultType="Friend">
+        select * from friend where userId = #{userId} and username = #{username};
+    </select>
+
     <select id="getAllFriendsByUserId" resultType="Friend">
         select * from friend where userId = #{userId};
     </select>
