@@ -8,10 +8,7 @@ import com.cyx.constant.MessageType;
 import com.cyx.constant.Port;
 import com.cyx.handler.DragWindowHandler;
 import com.cyx.pojo.*;
-import com.cyx.service.ChatListItemServiceImpl;
-import com.cyx.service.FriendServiceImpl;
-import com.cyx.service.MessageServiceImpl;
-import com.cyx.service.UserServiceImpl;
+import com.cyx.service.*;
 import com.cyx.task.ReceiveTask;
 import com.cyx.task.SendTask;
 import com.cyx.utils.DateUtils;
@@ -186,25 +183,33 @@ public class MainController implements Initializable {
                     currentSocket = serverSocket.accept();
                     ReceiveTask receiverTask = new ReceiveTask(currentSocket);
                     receiverTask.valueProperty().addListener((observable, oldValue, progressMsg) -> {
+
+                        String filename = progressMsg.getFileName();
+                        String senderName = progressMsg.getSenderName();
+                        int identification = progressMsg.getIdentification();
+                        long fileLength = progressMsg.getFileLength();
+                        String fileType = filename.split("\\.")[filename.split("\\.").length - 1];
+                        String filePath = "D:\\IdeaProjects\\DemoClient\\workplace\\" + currentUser.getUsername() + "\\restored\\" + identification + "\\" + filename;
+                        String url = "/images/logo/logo.png";
+                        Friend friend = friendService.getFriendByUserIdAndUsername(currentUser.getId(), senderName);
+                        if (friend != null) {
+                            url = friend.getUrl();
+                        }
+
+                        if (!messageItemPaneMap.containsKey(identification) && new File(filePath).exists()) {
+                            return;
+                        }
+
                         if (progressMsg.getMsgType().equals("receiveProgress")) {
 
-                            String filename = progressMsg.getFileName();
-                            String senderName = progressMsg.getSenderName();
-                            int type = MessageType.FILE_MESSAGE_RECEIVE;
-                            int identification = progressMsg.getIdentification();
-                            long fileLength = progressMsg.getFileLength();
-                            String fileType = filename.split("\\.")[filename.split("\\.").length - 1];
-                            int percentage = progressMsg.getPercentage();
-                            String filePath = "D:\\IdeaProjects\\DemoClient\\workplace\\bob\\restored\\" + filename;
+                            if (!messageItemPaneMap.containsKey(identification)) {
 
-                            if(!messageItemPaneMap.containsKey(identification)){
-                                String url = "/images/logo/logo.png";
-                                if (percentage < 20) {
-                                    Friend friend = friendService.getFriendByUserIdAndUsername(currentUser.getId(), senderName);
-                                    if (friend != null) {
-                                        url = friend.getUrl();
-                                    }
+                                if (friend != null) {
+                                    currentFriend = friend;
+                                    addNewChatListItem(friend);
                                 }
+
+                                int type = MessageType.FILE_MESSAGE_RECEIVE;
                                 Message message = new Message(-1, currentItemId, type,
                                         null, filename, fileLength, fileType, filePath, url);
                                 messageService.addMessage(message);
@@ -213,17 +218,39 @@ public class MainController implements Initializable {
                                 MessageItemPane messageItemPane = new MessageItemPane(message);
                                 messageVBox.getChildren().add(messageItemPane);
                                 messageItemPaneMap.put(identification, messageItemPane);
+
+                                weChatLogo.setVisible(false);
+                                topNameLabel.setVisible(true);
+                                chatInfoButton.setVisible(true);
+                                messageSplitPane.setVisible(true);
+                                messageSplitPane.setManaged(true);
+
+                                renderMessagesOnViewByChatItemId(currentItemId);
+                                topNameLabel.setText(currentFriend.getUsername());
+                                chatButton.setStyle("-fx-background-image: url(/images/button/bubble_focus.png)");
+                                addressListButton.setStyle("-fx-background-image: url(/images/button/album.png)");
                             }
 
                         }
                         MessageItemPane messageItemPane = messageItemPaneMap.get(progressMsg.getIdentification());
-                        AnchorPane progressPane = (AnchorPane) ((AnchorPane) messageItemPane.getChildren().get(0)).getChildren().get(0);
+                        AnchorPane filePane = (AnchorPane) messageItemPane.getChildren().get(0);
+                        ImageView fileImage = (ImageView) filePane.getChildren().get(1);
+                        AnchorPane progressPane = (AnchorPane) filePane.getChildren().get(0);
+                        Label metaLabel = (Label) filePane.getChildren().get(4);
                         Arc arc = (Arc) progressPane.getChildren().get(2);
                         arc.setLength(progressMsg.getPercentage() / 100f * 360);
-                        if (progressMsg.getPercentage() == 100) {
+                        if (progressMsg.getPercentage() >= 100) {
+                            fileImage.setVisible(true);
+                            fileImage.setManaged(true);
                             progressPane.setVisible(false);
                             progressPane.setManaged(false);
+                            metaLabel.setText("微信电脑端");
                             messageItemPaneMap.remove(progressMsg.getIdentification());
+                        } else {
+                            fileImage.setVisible(false);
+                            fileImage.setManaged(false);
+                            progressPane.setVisible(true);
+                            progressPane.setManaged(true);
                         }
                     });
                     new Thread(receiverTask).start();
@@ -427,28 +454,7 @@ public class MainController implements Initializable {
 
                             chatListScrollPane.setContent(chatVBox);
 
-                            int index = 0;
-                            for (; index < currentChatListItems.size(); index++) {
-                                if (currentChatListItems.get(index).getFriendId() == currentFriend.getId()) {
-                                    currentItemId = currentChatListItems.get(index).getId();
-                                    break;
-                                }
-                            }
-
-                            if (index == currentChatListItems.size()) {
-
-
-                                ChatListItem newChatListItem = new ChatListItem(-1, currentUser.getId(), currentFriend.getId(),
-                                        currentFriend.getUrl(), currentFriend.getUsername(), "", DateUtils.currentTime());
-                                chatListItemService.addChatListItem(newChatListItem);
-                                ChatListItem lastChatListItem = chatListItemService.getLastOneItemByUserId(currentUser.getId());
-                                newChatListItem.setId(lastChatListItem.getId());
-                                currentChatListItems.add(newChatListItem);
-                                chatVBox.getChildren().add(getChatListItemPane(newChatListItem));
-                                currentItemId = newChatListItem.getId();
-                                chatCountsLabel.setVisible(true);
-                                chatCountsLabel.setText(String.valueOf(currentChatListItems.size()));
-                            }
+                            addNewChatListItem(currentFriend);
 
                             Platform.runLater(() -> {
                                 renderMessagesOnViewByChatItemId(currentItemId);
@@ -559,6 +565,49 @@ public class MainController implements Initializable {
                 }
             }
         });
+    }
+
+
+    /**
+     * 经判断ChatList中是否有friend添加新ChatItem
+     *
+     * @param friend
+     */
+    private void addNewChatListItem(Friend friend) {
+        int chatItemId = getChatItemIdIfFriendInChatList(friend);
+        if (chatItemId != -1) {
+            currentItemId = chatItemId;
+        } else {
+            ChatListItem newChatListItem = new ChatListItem(-1, currentUser.getId(), currentFriend.getId(),
+                    currentFriend.getUrl(), currentFriend.getUsername(), "", DateUtils.currentTime());
+            chatListItemService.addChatListItem(newChatListItem);
+            ChatListItem lastChatListItem = chatListItemService.getLastOneItemByUserId(currentUser.getId());
+            newChatListItem.setId(lastChatListItem.getId());
+            currentChatListItems.add(newChatListItem);
+            chatVBox.getChildren().add(getChatListItemPane(newChatListItem));
+            currentItemId = newChatListItem.getId();
+            chatCountsLabel.setVisible(true);
+            chatCountsLabel.setText(String.valueOf(currentChatListItems.size()));
+        }
+    }
+
+    /**
+     * 判断聊天列表是否存在所选好友
+     *
+     * @return
+     */
+    private int getChatItemIdIfFriendInChatList(Friend friend) {
+        int index = 0;
+        for (; index < currentChatListItems.size(); index++) {
+            if (currentChatListItems.get(index).getFriendId() == friend.getId()) {
+                break;
+            }
+        }
+        if (index == currentChatListItems.size()) {
+            return -1;
+        } else {
+            return currentChatListItems.get(index).getId();
+        }
     }
 
     private void showChatView() {
@@ -682,6 +731,17 @@ public class MainController implements Initializable {
                 Label msgLabel = (Label) messageItemPane.getChildren().get(1);
                 msgLabel.maxWidthProperty().bind(rightAnchorPane.widthProperty().multiply(0.55));
 
+            } else if (message.getType() == MessageType.FILE_MESSAGE_SEND ||
+                    message.getType() == MessageType.FILE_MESSAGE_RECEIVE) {
+                AnchorPane filePane = (AnchorPane) messageItemPane.getChildren().get(0);
+                ImageView fileImage = (ImageView) filePane.getChildren().get(1);
+                AnchorPane progressPane = (AnchorPane) filePane.getChildren().get(0);
+                Label metaLabel = (Label) filePane.getChildren().get(4);
+                metaLabel.setText("微信电脑端");
+                progressPane.setVisible(false);
+                progressPane.setManaged(false);
+                fileImage.setVisible(true);
+                fileImage.setManaged(true);
             }
             messageItemPanes.add(messageItemPane);
         }
@@ -849,11 +909,12 @@ public class MainController implements Initializable {
                 new FileChooser.ExtensionFilter("图片", "*.png;*.jpg;*.jpeg;*.gif"));
         File file = fileChooser.showOpenDialog(mainStage);
         if (file != null) {
-            SendStrategy sendStrategy = new SendStrategy("send_strategy", 1001, currentUser.getUsername(), topNameLabel.getText().trim(),
+            int identification = new Random().nextInt(999999999);
+            SendStrategy sendStrategy = new SendStrategy("send_strategy", identification, currentUser.getUsername(), topNameLabel.getText().trim(),
                     file.getAbsolutePath(), file.length(), 8, 3, 1000);
             String info = new Gson().toJson(sendStrategy);
             SendTask.send(Port.SEND_PORT, info);
-            addFileTypeMessage(file, 1001);
+            addFileTypeMessage(file, identification);
         }
     }
 
@@ -947,11 +1008,12 @@ public class MainController implements Initializable {
 
                 sendButton.setOnMouseClicked(sendButtonEvent -> {
                     if (sendButtonEvent.getButton() == MouseButton.PRIMARY && sendButtonEvent.getClickCount() == 1) {
-                        SendStrategy sendStrategy = new SendStrategy("send_strategy", 1002, currentUser.getUsername(), topNameLabel.getText().trim(),
+                        int identification = new Random().nextInt(999999999);
+                        SendStrategy sendStrategy = new SendStrategy("send_strategy", identification, currentUser.getUsername(), topNameLabel.getText().trim(),
                                 files.get(0).getAbsolutePath(), files.get(0).length(), 8, 3, 1000);
                         String info = new Gson().toJson(sendStrategy);
                         SendTask.send(Port.SEND_PORT, info);
-                        addFileTypeMessage(files.get(0), 1002);
+                        addFileTypeMessage(files.get(0), identification);
                         dialogStage.close();
                         messageScrollPane.vvalueProperty().bind(messageVBox.heightProperty());
                     }

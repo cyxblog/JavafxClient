@@ -16,6 +16,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -56,8 +57,13 @@ public class MessageItemPane extends AnchorPane {
 
     public void setTextPane(String url, String text, int type) {
 
-
-        ImageView profileView = new ImageView(new Image("file:" + url));
+        Image image;
+        if (type == MessageType.FILE_MESSAGE_RECEIVE) {
+            image = new Image(url);
+        } else {
+            image = new Image("file:" + url);
+        }
+        ImageView profileView = new ImageView(image);
         profileView.setFitWidth(35);
         profileView.setFitHeight(35);
         Label msgLabel = new Label(text);
@@ -85,7 +91,16 @@ public class MessageItemPane extends AnchorPane {
     }
 
     private void setFilePane(String url, String fileName, long fileLength, String filePath, int type) {
-        ImageView profileView = new ImageView(new Image("file:" + url));
+        Image image;
+        String metaInfo;
+        if (type == MessageType.FILE_MESSAGE_RECEIVE) {
+            image = new Image(url);
+            metaInfo = "接收中   预计需要12秒";
+        } else {
+            image = new Image("file:" + url);
+            metaInfo = "发送中   预计需要5秒";
+        }
+        ImageView profileView = new ImageView(image);
         profileView.setFitWidth(35);
         profileView.setFitHeight(35);
         ImageView fileImage = new ImageView(new Image(FileUtils.getFileTypeImagePath(fileName)));
@@ -97,7 +112,7 @@ public class MessageItemPane extends AnchorPane {
         Label fileLengthLabel = new Label(getFileLengthStr(fileLength));
         fileLengthLabel.setFont(new Font(12));
         fileLengthLabel.setStyle("-fx-text-fill: #999999");
-        Label metaLabel = new Label("微信电脑版");
+        Label metaLabel = new Label(metaInfo);
         metaLabel.setFont(new Font(12));
         metaLabel.setStyle("-fx-text-fill: #dadada");
 
@@ -120,6 +135,9 @@ public class MessageItemPane extends AnchorPane {
             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
                 try {
                     File file = new File(filePath);
+                    if(!file.exists()){
+                        return;
+                    }
                     Desktop.getDesktop().open(file);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -142,8 +160,13 @@ public class MessageItemPane extends AnchorPane {
 
                     try {
                         File file = new File(filePath);
-                        Desktop.getDesktop().open(file);
+                        if(!file.exists()){
+                            return;
+                        }
                         File fileDir = file.getParentFile();
+                        if(fileDir==null){
+                            return;
+                        }
                         Desktop.getDesktop().open(fileDir);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -153,10 +176,13 @@ public class MessageItemPane extends AnchorPane {
             }
         });
 
+        fileImage.setVisible(false);
+        fileImage.setManaged(false);
+
         filePane.getChildren().addAll(progressPane, fileImage, fileNameLabel, fileLengthLabel, metaLabel);
 
-        AnchorPane.setRightAnchor(progressPane, 70.0);
-        AnchorPane.setTopAnchor(progressPane, 10.0);
+        AnchorPane.setRightAnchor(progressPane, 25.0);
+        AnchorPane.setTopAnchor(progressPane, 15.0);
 
         AnchorPane.setLeftAnchor(fileNameLabel, 10.0);
         AnchorPane.setTopAnchor(fileNameLabel, 5.0);
@@ -191,7 +217,7 @@ public class MessageItemPane extends AnchorPane {
         Arc arc = new Arc();
         arc.setRadiusX(10);
         arc.setRadiusY(10);
-        arc.setLength(120);
+        arc.setLength(0);
         arc.setType(ArcType.ROUND);
         arc.setStartAngle(90);
         arc.setFill(Paint.valueOf("#ffffff"));
@@ -225,7 +251,7 @@ public class MessageItemPane extends AnchorPane {
         AnchorPane progressPane = new AnchorPane();
         progressPane.setPrefWidth(40);
         progressPane.setPrefHeight(45);
-        progressPane.setStyle("-fx-background-color: #d1d1d1");
+        progressPane.setStyle("-fx-background-color: transparent");
 
         progressPane.getChildren().addAll(baseFileIV, base, arc, circle, lineBox);
 
@@ -244,7 +270,13 @@ public class MessageItemPane extends AnchorPane {
 
     private void setImagePane(String url, String filePath, int type) {
 
-        ImageView profileView = new ImageView(new Image("file:" + url));
+        Image image;
+        if (type == MessageType.FILE_MESSAGE_RECEIVE) {
+            image = new Image(url);
+        } else {
+            image = new Image("file:" + url);
+        }
+        ImageView profileView = new ImageView(image);
         profileView.setFitWidth(35);
         profileView.setFitHeight(35);
 
@@ -266,7 +298,11 @@ public class MessageItemPane extends AnchorPane {
         imageView.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 1) {
                 try {
-                    Desktop.getDesktop().open(new File(filePath));
+                    File file = new File(filePath);
+                    if(!file.exists()){
+                        return;
+                    }
+                    Desktop.getDesktop().open(file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -285,16 +321,17 @@ public class MessageItemPane extends AnchorPane {
                 contextMenu.getItems().addAll(copyItem, editItem, forwardItem, collectItem, multiChoicesItem,
                         referenceItem, anotherSaveItem, showOnDirItem, deleteItem);
 
-                showOnDirItem.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
+                showOnDirItem.setOnAction(event1 -> {
 
-                        try {
-                            File fileDir = new File(filePath).getParentFile();
-                            Desktop.getDesktop().open(fileDir);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    try {
+                        File file = new File(filePath);
+                        if(!file.exists()){
+                            return;
                         }
+                        File fileDir = file.getParentFile();
+                        Desktop.getDesktop().open(fileDir);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 });
                 contextMenu.show(imageView, event.getScreenX(), event.getScreenY());
