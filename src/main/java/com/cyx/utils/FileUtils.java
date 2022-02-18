@@ -4,7 +4,7 @@ public class FileUtils {
 
     public static String getFileTypeImagePath(String fileName) {
         String suffix = fileName.split("\\.")[fileName.split("\\.").length - 1];
-        switch (suffix){
+        switch (suffix) {
             case "ppt":
             case "pptx":
                 return "/images/file/ppt.png";
@@ -23,6 +23,15 @@ public class FileUtils {
                 return "/images/file/txt.png";
             default:
                 return "/images/file/unknown_file.png";
+        }
+    }
+
+    public static String getFileType(String fileName) {
+        String suffix = fileName.split("\\.")[fileName.split("\\.").length - 1];
+        if (suffix.equals("png") || suffix.equals("jpg") || suffix.equals("jpeg") || suffix.equals("gif")) {
+            return "image";
+        } else {
+            return "file";
         }
     }
 }

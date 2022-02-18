@@ -49,6 +49,8 @@ public class MessageItemPane extends AnchorPane {
             setTextPane(url, text, type);
         } else if (type == MessageType.IMAGE_MESSAGE_SEND || type == MessageType.IMAGE_MESSAGE_RECEIVE) {
             setImagePane(url, filePath, type);
+            this.setVisible(false);
+            this.setManaged(false);
         } else {
             setFilePane(url, fileName, fileLength, filePath, type);
         }
@@ -271,7 +273,7 @@ public class MessageItemPane extends AnchorPane {
     private void setImagePane(String url, String filePath, int type) {
 
         Image image;
-        if (type == MessageType.FILE_MESSAGE_RECEIVE) {
+        if (type == MessageType.IMAGE_MESSAGE_RECEIVE) {
             image = new Image(url);
         } else {
             image = new Image("file:" + url);
@@ -344,8 +346,8 @@ public class MessageItemPane extends AnchorPane {
 
             AnchorPane.setLeftAnchor(profileView, 25.0);
             AnchorPane.setTopAnchor(profileView, 10.0);
-            AnchorPane.setLeftAnchor(imageView, 70.0);
-            AnchorPane.setTopAnchor(imageView, 10.0);
+            AnchorPane.setLeftAnchor(imagePane, 70.0);
+            AnchorPane.setTopAnchor(imagePane, 10.0);
         } else {
             AnchorPane.setRightAnchor(profileView, 25.0);
             AnchorPane.setTopAnchor(profileView, 10.0);
